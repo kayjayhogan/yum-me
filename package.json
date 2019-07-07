@@ -4,7 +4,8 @@
   "description": "A food blog app where users can share their love of dining",
   "main": "server/index.js",
   "scripts": {
-    "start": "nodemon server/index.js"
+    "start": "nodemon server/index.js",
+    "build": "webpack -w -d"
   },
   "repository": {
     "type": "git",

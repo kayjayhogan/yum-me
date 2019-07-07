@@ -1,0 +1,131 @@
+body {
+  background-color: #e8efeb;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  outline: none;
+}
+
+.landing-body {
+  background: url("https://images.unsplash.com/photo-1526234362653-3b75a0c07438?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+}
+
+.landing-container {
+  width: 70%;
+  min-width: 700px;
+  margin: 0 auto;
+  padding-top: 10vh;
+}
+
+.landing-img {
+  width: 100%;
+  margin: 0 auto;
+  display: block;
+}
+
+.landing-button-container {
+  width: 380px;
+  margin: 20px auto;
+}
+
+button {
+  margin: 20px 5px 30px 5px;
+}
+
+.button-main {
+  background-color: rgba(59,19,96, 0.9);
+  border: 2px solid rgba(59,19,96, 0.9);
+  color: white;
+  border-radius: 25px;
+  height: 50px;
+  width: 180px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button-main:hover {
+  background-color: #4c1a7a;   
+  border-color: #4c1a7a;   
+}
+
+.button-foil {
+  border: 2px solid #3b1360;
+  color: #3b1360;
+  border-radius: 25px;
+  height: 50px;
+  width: 180px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: rgba(255,255,255,0.9);
+}
+
+.button-foil:hover {
+  color: #602993;    
+  border-color: #602993;    
+  background-color: white;
+}
+
+.landing-h1 {
+  color: white;
+  font-family: "Roboto Slab";
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  text-align: right;
+  font-size: 7em;
+  position: relative;
+  top: 30px;
+  text-shadow: 0px -2px 3px rgba(0,0,0,0.3),
+               0px 2px 3px rgba(0,0,0,0.3),
+               2px 0px 3px rgba(0,0,0,0.3),
+               -2px 0px 3px rgba(0,0,0,0.3),
+               2px -2px 3px rgba(0,0,0,0.3),
+               2px 2px 3px rgba(0,0,0,0.3),
+               -2px 2px 3px rgba(0,0,0,0.3),
+               -2px -2px 3px rgba(0,0,0,0.3),
+               0px -8px 13px rgba(0,0,0,0.1),
+               0px -8px 23px rgba(0,0,0,0.1);
+}
+
+.landing-h2 {
+  color: white;
+  font-family: "Raleway";
+  margin: 0;
+  text-align: right;
+  font-size: 3.5em;
+  position: relative;
+  top: 70px;
+  text-shadow: 0px -2px 2px rgba(0,0,0,0.3),
+               0px 2px 2px rgba(0,0,0,0.3),
+               2px 0px 2px rgba(0,0,0,0.3),
+               -2px 0px 2px rgba(0,0,0,0.3),
+               2px -2px 2px rgba(0,0,0,0.3),
+               2px 2px 2px rgba(0,0,0,0.3),
+               -2px 2px 2px rgba(0,0,0,0.3),
+               -2px -2px 2px rgba(0,0,0,0.3),
+               0px -8px 13px rgba(0,0,0,0.1),
+               0px -8px 23px rgba(0,0,0,0.1);
+}
+
+.landing-container img {
+  width: 80%;
+  margin-left: 8%;
+}
+
+.landing-container-flex {
+  display: flex;
+  min-width: 500px;
+  align-items: center;
+}
+
+.landing-container-flex div {
+  flex: 1;
+}
