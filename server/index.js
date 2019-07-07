@@ -1,7 +1,7 @@
 const express = require('express');
 const parser = require('body-parser');
 const path = require('path');
-// const router = require('./router');
+const router = require('./router');
 // const db = require('../database/index.js')
 
 const app = express();
@@ -12,6 +12,6 @@ app.use(parser.urlencoded({extended: true}));
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-// app.use('/', router);
+app.use('/', router);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
