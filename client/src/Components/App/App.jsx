@@ -12,10 +12,30 @@ class App extends React.Component {
     }
   }
 
+  renderView() {
+    const { view } = this.state;
+
+    if (view === 'landing') {
+      return <Landing />
+    } else if (view === 'browse') {
+      // browse component
+    } else if (view ==='login') {
+      // login component (modal instead?)
+    } else if (view ==='signup') {
+      // signup component (modal instead?)
+    } else if (view === 'createPost') {
+      // post component
+    } else if (view === 'user') {
+      // user component
+    } else if (view === 'feed') {
+      // feed component
+    } 
+  }
+
   render() {
     return(
       <div>
-        <Landing />
+        {this.renderView()}
       </div>
     );
   }
