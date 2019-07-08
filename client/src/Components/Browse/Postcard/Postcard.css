@@ -1,0 +1,83 @@
+.post-card {
+  border-radius: 4px;
+  background-color: white;
+  border: 1px solid rgba(0,0,0,0.2);
+}
+
+.post-card-user {
+  box-sizing: border-box;
+  padding: 10px 15px;
+}
+
+.post-card-user a {
+  font-weight: bold;
+  color: #3b1360;
+  margin-left: 20px;
+  text-decoration: none;
+}
+
+.post-card-user a:hover {
+  color: #602993; 
+}
+
+.post-card-avatar {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  vertical-align: middle;
+  border: 1px solid rgb(0,0,0,0.2);
+}
+
+.post-card-img {
+  width: 100%;
+}
+
+.post-card-description {
+  padding: 10px 15px;
+}
+
+.post-card-description h5 {
+  color: #3b1360;
+  margin-bottom: 10px;
+}
+
+.post-card-description h5:hover {
+  color: #602993;
+}
+
+.post-card-description p {
+  color: rgb(37, 37, 37);
+  font-size: 0.8em;
+}
+
+.post-card-details {
+  border-top: 1px solid rgba(0,0,0,0.2);
+  padding: 10px 15px;
+  font-size: 0.8em;
+  color: rgba(0,0,0,0.4);
+}
+
+.post-card-details span {
+  padding-top: 10px;
+  display: inline-block;
+}
+
+.post-card-comment-icon {
+  top: 2px;
+  position: relative;
+}
+
+.post-card-details span:nth-of-type(2){
+  padding-left: 20px;
+}
+
+.post-card-date {
+  width: 100%;
+  text-align: right;
+}
+
+.post-card-details-split {
+  width: 50%;
+  display: inline-block;
+}
