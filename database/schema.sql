@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS users (
 	username    TEXT NOT NULL UNIQUE,
 	pass        TEXT NOT NULL,
 	loc         TEXT NOT NULL,
-	created_at  TIMESTAMP NOT NULL,
+	created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW(),
 	avatar      TEXT NOT NULL
 );
 
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS posts (
 	restaurant  TEXT NOT NULL,
 	descript    TEXT NOT NULL,
 	recommended BOOLEAN NOT NULL,
-	created_at  TIMESTAMP NOT NULL,
+	created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW(),
 	img_url     TEXT NOT NULL
 );
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS comments (
 	author_id  INTEGER REFERENCES users(id),
 	post_id    INTEGER REFERENCES posts(id),
 	content    TEXT NOT NULL,
-	created_at TIMESTAMP NOT NULL
+	created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS likes (
