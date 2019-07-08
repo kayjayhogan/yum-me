@@ -1,5 +1,4 @@
 ![yum.me logo](https://res.cloudinary.com/kjhogan/image/upload/v1562452169/yumme_4_ukpyej.png)
-Format: ![Alt Text](url)
 # yum.me
 
 > A food blogging app for those who are passionate about sharing their dining experiences
