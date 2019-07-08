@@ -5,14 +5,18 @@ const pool = new Pool({
   database: 'yumme',
   user: 'kathleenhogan',
   password: '',
-  port: 4000
+  port: 5432
 });
 
 pool.query('SELECT NOW()', (err, res) => {
   if (err) {
   	return console.log('Error accessing database: ', err )
   }
-  console.log('Database is up and running');
+  console.log('Database is up and running!');
 })
 
 module.exports = pool;
+
+// const query = (text, params) => pool.query(text, params)
+
+// module.exports = { query }
