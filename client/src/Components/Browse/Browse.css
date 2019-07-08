@@ -1,0 +1,68 @@
+.browse-h1 {
+  color: #3b1360;
+  margin-bottom: 30px;
+  padding-top: 100px;
+  text-align: center;
+  cursor: default;
+}
+
+.browse-wrap {
+  width: 95vw;
+  margin-right: auto;
+  margin-left: auto;
+  box-sizing: border-box;
+}
+
+.hvr-grow {
+  display: inline-block;
+  vertical-align: middle;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  transition-duration: 0.3s;
+  transition-property: transform;
+}
+
+.hvr-grow:hover,
+.hvr-grow:focus,
+.hvr-grow:active {
+  transform: scale(1.1);
+  position: relative;
+  z-index: 50;
+  cursor: pointer;
+}
+
+/* MOBILE */
+.four-col-grid {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.four-col-grid .grid-item {
+  margin-bottom: 15px;
+}
+
+/* TABLET */
+@media screen and (min-width: 768px) {
+  .four-col-grid {
+    flex-direction: row;
+  }
+
+  .four-col-grid .grid-item {
+    flex-basis: 45%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    margin-bottom: 15px;
+  }
+} 
+
+/* DESKTOP */
+@media screen and (min-width: 1025px) {  
+  .four-col-grid .grid-item {
+    flex-basis: 22.5%;
+    margin-left: 1.25%;
+    margin-right: 1.25%;
+    margin-bottom: 15px;
+  }
+}

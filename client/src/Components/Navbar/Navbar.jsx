@@ -42,7 +42,12 @@ class Navbar extends React.Component {
             <FaBars />
           </span>
           <div>
-            {yummeLink}
+            <a href="#" className="nav-logo">
+              <img src="https://res.cloudinary.com/kjhogan/image/upload/v1561339707/happy_dbmo3c_ihdbmd.png"></img>        
+            </a>
+            <a href="#" className="nav-logo">
+              yum.me      
+            </a>
           </div>
           <div className="nav-search-input-container">
             <div className="nav-search-flex">

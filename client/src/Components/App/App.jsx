@@ -1,12 +1,13 @@
 import React from 'react';
 import Landing from '../Landing/Landing.jsx';
+import Browse from '../Browse/Browse.jsx';
 import './App.css';
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      view: 'landing',
+      view: 'browse',
       currentPost: '',
       posts: []
     }
@@ -18,7 +19,7 @@ class App extends React.Component {
     if (view === 'landing') {
       return <Landing />
     } else if (view === 'browse') {
-      // browse component
+      return <Browse />
     } else if (view ==='login') {
       // login component (modal instead?)
     } else if (view ==='signup') {

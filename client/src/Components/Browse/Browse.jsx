@@ -26,15 +26,14 @@ class Browse extends React.Component {
   }
 
   render() {
-    const { username, avatar } = this.props.location.state;
     return(
       <div>
-        <Navbar username={username} avatar={avatar}/>
+        <Navbar />
         <h1 className="browse-h1">Recent Posts</h1>
         <div className="browse-wrap">
           <div className="four-col-grid">
             {this.state.posts.map((post, i) => {
-              return <div className="grid-item hvr-grow" key={i}><PostCard post={post} username={username} avatar={avatar}/></div>               
+              return <div className="grid-item hvr-grow" key={i}><PostCard post={post} /></div>               
             })}
           </div>
         </div>
