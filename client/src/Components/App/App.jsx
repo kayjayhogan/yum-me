@@ -9,7 +9,8 @@ class App extends React.Component {
     this.state = {
       view: 'browse',
       currentPost: '',
-      posts: []
+      posts: [],
+      user: ''
     }
   }
 
