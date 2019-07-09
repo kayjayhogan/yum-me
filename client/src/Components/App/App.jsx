@@ -7,7 +7,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      view: 'browse',
+      view: 'landing',
       currentPost: '',
       posts: [],
       user: ''
@@ -20,11 +20,7 @@ class App extends React.Component {
     if (view === 'landing') {
       return <Landing />
     } else if (view === 'browse') {
-      return <Browse />
-    } else if (view ==='login') {
-      // login component (modal instead?)
-    } else if (view ==='signup') {
-      // signup component (modal instead?)
+      return <Browse /> 
     } else if (view === 'createPost') {
       // post component
     } else if (view === 'user') {
