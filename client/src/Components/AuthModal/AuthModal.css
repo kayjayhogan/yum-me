@@ -1,0 +1,218 @@
+
+.sign-in-modal-container {
+  background-color: rgba(0,0,0,0.5);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: 175ms flyUp ease forwards;
+}
+
+.signin-modal-close {
+  font-size: 1.8em;
+  color: #3b1360;
+}
+
+.signin-modal-close:hover {
+  cursor: pointer;
+  color: #602993;
+}
+
+.sign-in-modal {
+  background-color: white;
+  border-radius: 4px;
+  width: 45%;
+  min-width: 520px; 
+  height: 50vh;
+  max-height: 570px;
+  max-width: 576px;
+  margin-bottom: 10px;
+  padding: 2%;
+  box-sizing: border-box;
+}
+
+.sign-in-modal-header, .account-modal-header {
+  position: relative;
+}
+
+.sign-in-modal-header h3 {
+  margin: 5px auto 25px auto;
+  text-align: center;
+  font-size: 1.6em;
+}
+
+.sign-in-modal-header img {
+  left: 30%;
+  top: -5px;
+  width: 50px;
+  position: absolute;
+}
+
+.signin-form {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.signin-form-input {
+  outline: none;
+  transition: border-color .1s ease;
+  font-size: 14px;
+  line-height: 1.4;
+  display: block;
+  width: 80%;
+  border: 2px solid rgba(0,0,0,.2);
+  border-radius: 4px;
+  color: rgba(0,0,0,.87);
+  background: #fff;
+  padding: 10px 16px;
+  margin: 2px auto 12px auto;
+  box-sizing: border-box;
+}
+
+.signin-form label {
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 0.9em;
+}
+
+.create-acct-label {
+  margin-top: 30px;
+  margin-bottom: 5px;
+  text-align: center;
+  font-size: 0.9em;
+}
+
+.create-acct {
+  color: #3b1360;
+  font-size: 0.9em;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.create-acct:hover {
+  color: #602993;
+  cursor: pointer;
+}
+
+.nav-modal-signin-btn {
+  transition: background-color .1s ease;
+  position: relative;
+  font-size: 14px;
+  line-height: 1.4;
+  display: block;
+  width: 200px;
+  border: 2px solid #3b1360;
+  border-radius: 25px;
+  color: white;
+  font-weight: 700;
+  background-color: #3b1360;
+  padding: 10px 16px;
+  margin: 20px auto 12px auto;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.nav-modal-signin-btn:hover{
+  background-color: #602993;
+  border-color: #602993;
+}
+
+#modal-root input::placeholder {
+  color: rgba(0, 0, 0, 0.2);
+}
+
+/* create account modal */
+.account-modal {
+  background-color: white;
+  border-radius: 4px;
+  width: 45%;
+  min-width: 520px; 
+  max-width: 576px;
+  height: 56vh;
+  max-height: 650px;
+  margin-bottom: 10px;
+  padding: 2%;
+  box-sizing: border-box;
+}
+
+.account-modal-header h2 {
+  margin-top: 5px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 1.6em;
+}
+
+.account-modal-header img {
+  width: 90px;
+  position: absolute;
+  left: 22%;
+  top: -20px;
+}
+
+.account-form-name {
+  transition: border-color .1s ease;
+  font-size: 14px;
+  line-height: 1.4;
+  display: inline-block;
+  width: 49%;
+  border: 2px solid rgba(0,0,0,.2);
+  border-radius: 4px;
+  color: rgba(0,0,0,.87);
+  background: #fff;
+  padding: 10px 16px;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+}
+
+.account-modal p {
+  text-align: center;
+  font-size: 0.9em;
+}
+
+.account-modal-signin {
+  color: #3b1360;
+  font-weight: 700;
+}
+
+.account-modal form {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.account-form-input {
+  outline: none;
+  transition: border-color .1s ease;
+  font-size: 14px;
+  line-height: 1.4;
+  display: block;
+  border: 2px solid rgba(0,0,0,.2);
+  border-radius: 4px;
+  color: rgba(0,0,0,.87);
+  background: #fff;
+  padding: 10px 16px;
+  margin: 2px 0 12px 0;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.account-show-password {
+  color: #3b1360;
+  right: 10px;
+  top: 14px;
+  position: absolute;
+  font-size: 0.9em;
+}
+
+.account-modal-signin-label {
+  margin-top: 25px;
+  margin-bottom: 5px;
+}
+
+.account-modal-signin:hover, .account-show-password:hover {
+  color: #602993;
+  cursor: pointer;
+}

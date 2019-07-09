@@ -1,4 +1,5 @@
 import React from 'react';
+import AuthModal from '../AuthModal/AuthModal.jsx';
 import './Navbar.css';
 import { FaBars, FaUser, FaSearch } from 'react-icons/fa';
 
@@ -9,10 +10,24 @@ class Navbar extends React.Component {
       username: this.props.username,
       avatar: this.props.avatar,
       term: '',
-      redirect: false
+      showModal: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleShowModal = this.handleShowModal.bind(this);
+    this.handleHideModal = this.handleHideModal.bind(this);
+  }
+
+  handleShowModal() {
+    this.setState({
+      showModal: true
+    });
+  }
+
+  handleHideModal() {
+    this.setState({
+      showModal: false
+    });
   }
 
   handleMenu() {
@@ -34,16 +49,19 @@ class Navbar extends React.Component {
   }
 
   render() {
+    const modal = this.state.showModal ? 
+    (<AuthModal handleHide={this.handleHideModal}></AuthModal>) : null;
    
     return(
       <div>
+        {modal}
         <nav className="navbar">
           <span className="navbar-toggle" onClick={this.handleMenu}>
             <FaBars />
           </span>
           <div>
             <a href="#" className="nav-logo">
-              <img src="https://res.cloudinary.com/kjhogan/image/upload/v1561339707/happy_dbmo3c_ihdbmd.png"></img>        
+              <img src="https://res.cloudinary.com/kjhogan/image/upload/v1562452169/yumme_logo_white_plvcb7.png"></img>        
             </a>
             <a href="#" className="nav-logo">
               yum.me      
@@ -70,7 +88,7 @@ class Navbar extends React.Component {
             </div>
             <div>
               <li>
-                <a href="#" className="nav-links">log in</a>
+                <a href="#" className="nav-links" onClick={this.handleShowModal}>log in</a>
               </li>
             </div>
           </ul>
