@@ -28,7 +28,7 @@ class Browse extends React.Component {
   render() {
     return(
       <div>
-        <Navbar />
+        <Navbar user={this.props.user} />
         <h1 className="browse-h1">Recent Posts</h1>
         <div className="browse-wrap">
           <div className="four-col-grid">

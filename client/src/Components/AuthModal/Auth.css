@@ -132,7 +132,7 @@
   width: 45%;
   min-width: 520px; 
   max-width: 576px;
-  height: 56vh;
+  height: 85vh;
   max-height: 650px;
   margin-bottom: 10px;
   padding: 2%;
@@ -154,11 +154,14 @@
 }
 
 .account-form-name {
+  display: flex;
+}
+
+.account-form-name input {
   transition: border-color .1s ease;
   font-size: 14px;
   line-height: 1.4;
-  display: inline-block;
-  width: 49%;
+  flex: 1;
   border: 2px solid rgba(0,0,0,.2);
   border-radius: 4px;
   color: rgba(0,0,0,.87);

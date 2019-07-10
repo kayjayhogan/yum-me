@@ -7,7 +7,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      view: 'landing',
+      view: 'browse',
       currentPost: '',
       posts: [],
       user: ''
@@ -20,7 +20,7 @@ class App extends React.Component {
     if (view === 'landing') {
       return <Landing />
     } else if (view === 'browse') {
-      return <Browse /> 
+      return <Browse user={this.state.user} /> 
     } else if (view === 'createPost') {
       // post component
     } else if (view === 'user') {

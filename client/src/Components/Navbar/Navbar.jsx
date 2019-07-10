@@ -10,7 +10,8 @@ class Navbar extends React.Component {
       username: this.props.username,
       avatar: this.props.avatar,
       term: '',
-      showModal: false
+      showModal: false,
+      currentUser: this.props.user
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);

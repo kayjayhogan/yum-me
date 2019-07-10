@@ -13,4 +13,7 @@ router.route('/post_likes')
 router.route('/post_comments')
   .get(controller.findPostComments);
 
+router.route('/register')
+  .post(controller.register);
+
 module.exports = router;

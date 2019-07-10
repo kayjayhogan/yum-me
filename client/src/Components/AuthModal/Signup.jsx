@@ -7,15 +7,62 @@ class Signup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showPassword: false
+      showPassword: false,
+      username: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      password:'',
+      password2: '',
+      avatar: '',
+      file: '',
+      location: ''
     };
     this.handleShowPassword = this.handleShowPassword.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleUploadImage = this.handleUploadImage.bind(this);
   }
 
   handleShowPassword() {
     this.setState({
       showPassword: !this.state.showPassword
     });
+  }
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
+  handleUploadImage(e){
+    e.preventDefault();
+    this.setState({
+      file: e.target.files[0]
+    });
+  }
+
+  async handleSubmit(e){
+    e.preventDefault();
+    const { file } = this.state;
+  
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', `${process.env.PASSWORD}`);
+
+    const response = await axios.post(
+      `https://api.cloudinary.com/v1_1/${process.env.NAME}/image/upload`,
+      formData
+    );
+    const { username, firstName, lastName, email, password, password2, avatar, location } = this.state;
+    axios 
+      .post('/register', { username, firstName, lastName, email, password, password2, avatar: response.data.url, location })
+      .then(() => {
+        console.log("register success");
+      })
+      .catch(err => console.log("Could not register user: ", err));
+    this.form.reset();
   }
 
   render() {
@@ -26,15 +73,25 @@ class Signup extends React.Component {
           <img src="https://res.cloudinary.com/kjhogan/image/upload/v1562452172/yumme_signup_kuh9ij.png"></img>
           <h2>Sign Up</h2>
         </div>
-        <form>
-          <input type="text" className="account-form-name" style={{marginRight: "1%"}} placeholder="First name"></input>
-          <input type="text" className="account-form-name" style={{marginLeft: "1%"}} placeholder="Last name"></input>
-          <input type="email" className="account-form-input" placeholder="Email"></input>
+        <form onSubmit = {this.handleSubmit} ref={form => this.form = form}>
+          <div className="account-form-name">
+            <input type="text" name="firstName" style={{marginRight: "2px"}} placeholder="First name" onChange={this.handleChange} required></input>
+            <input type="text" name="lastName" style={{marginLeft: "2px"}} placeholder="Last name" onChange={this.handleChange} required></input>
+          </div>
+          <input type="email" name="email" className="account-form-input" placeholder="Email" onChange={this.handleChange} required></input>          
           <div style={{position: "relative"}}>
-            <input type={this.state.showPassword ? "text" : "password"} className="account-form-input" placeholder="Password (8 character minimum)"></input>
+            <input type={this.state.showPassword ? "text" : "password"} name="password" className="account-form-input" minLength="6" placeholder="Password (6 character minimum)" onChange={this.handleChange} required></input>
             <span className="account-show-password" onClick={this.handleShowPassword}>Show</span>
           </div>
-          <button className="nav-modal-signin-btn">
+          <input type="password" name="password2" className="account-form-input" placeholder="Confirm Password" onChange={this.handleChange} required></input>         
+          <input type="text" name="location" className="account-form-input" placeholder="Location (City, State)" onChange={this.handleChange} required></input>         
+          <div>
+            <p>Avatar</p>
+            <a>
+            <input type="file" onChange={this.handleUploadImage} />
+            </a>
+          </div>
+          <button className="nav-modal-signin-btn" type="submit">
             submit
           </button>
         </form>
