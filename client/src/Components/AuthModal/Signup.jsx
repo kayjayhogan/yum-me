@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { MdClose } from 'react-icons/md';
 import './Auth.css';
 
@@ -14,7 +15,6 @@ class Signup extends React.Component {
       email: '',
       password:'',
       password2: '',
-      avatar: '',
       file: '',
       location: ''
     };
@@ -45,8 +45,7 @@ class Signup extends React.Component {
 
   async handleSubmit(e){
     e.preventDefault();
-    const { file } = this.state;
-  
+    const { file } = this.state;  
     const formData = new FormData();
     formData.append('file', file);
     formData.append('upload_preset', `${process.env.PASSWORD}`);
@@ -55,11 +54,11 @@ class Signup extends React.Component {
       `https://api.cloudinary.com/v1_1/${process.env.NAME}/image/upload`,
       formData
     );
-    const { username, firstName, lastName, email, password, password2, avatar, location } = this.state;
-    axios 
-      .post('/register', { username, firstName, lastName, email, password, password2, avatar: response.data.url, location })
+    const { username, firstName, lastName, email, password, password2, location } = this.state;
+    let avatar = response.data.url;
+    axios.post('/register', { username, firstName, lastName, email, password, password2, avatar, location })
       .then(() => {
-        console.log("register success");
+        console.log("Successfully registered user");
       })
       .catch(err => console.log("Could not register user: ", err));
     this.form.reset();
@@ -78,6 +77,7 @@ class Signup extends React.Component {
             <input type="text" name="firstName" style={{marginRight: "2px"}} placeholder="First name" onChange={this.handleChange} required></input>
             <input type="text" name="lastName" style={{marginLeft: "2px"}} placeholder="Last name" onChange={this.handleChange} required></input>
           </div>
+          <input type="text" name="username" className="account-form-input" placeholder="Username" onChange={this.handleChange} required></input>          
           <input type="email" name="email" className="account-form-input" placeholder="Email" onChange={this.handleChange} required></input>          
           <div style={{position: "relative"}}>
             <input type={this.state.showPassword ? "text" : "password"} name="password" className="account-form-input" minLength="6" placeholder="Password (6 character minimum)" onChange={this.handleChange} required></input>
@@ -86,10 +86,10 @@ class Signup extends React.Component {
           <input type="password" name="password2" className="account-form-input" placeholder="Confirm Password" onChange={this.handleChange} required></input>         
           <input type="text" name="location" className="account-form-input" placeholder="Location (City, State)" onChange={this.handleChange} required></input>         
           <div>
-            <p>Avatar</p>
-            <a>
-            <input type="file" onChange={this.handleUploadImage} />
-            </a>
+            <label>
+              Avatar:
+              <input type="file" onChange={this.handleUploadImage} />
+            </label>
           </div>
           <button className="nav-modal-signin-btn" type="submit">
             submit

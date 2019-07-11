@@ -45,7 +45,8 @@ module.exports = {
     if (errors.length > 0) {
       res.status(404).send("Please enter all fields.")
     } else {
-      // make promises of bcrypt functions
+
+      // MAKING PROMISES OF BCRYPT FUNCTIONS
       // ---------------------------------
       generateSalt = (password) => {
         return new Promise((resolve, reject) => {
