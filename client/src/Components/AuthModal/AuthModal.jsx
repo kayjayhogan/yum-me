@@ -18,9 +18,9 @@ class AuthModal extends React.Component {
   renderAuthView() {
     const { view } = this.state;
     if (view === 'login') {
-      return <Login changeView={(view) => this.changeAuthView('signup')} handleHide={this.props.handleHide}/>
+      return <Login changeAuthView={(view) => this.changeAuthView('signup')} changeView={(option) => this.props.changeView(option)} handleHide={this.props.handleHide} changeUser={(user) => this.props.changeUser(user)}/>
     } else if(view === 'signup') {
-      return <Signup changeView={(view) => this.changeAuthView('login')} handleHide={this.props.handleHide}/>
+      return <Signup changeAuthView={(view) => this.changeAuthView('login')} changeView={(option) => this.props.changeView(option)} handleHide={this.props.handleHide} changeUser={(user) => this.props.changeUser(user)}/>
     } 
   }
 

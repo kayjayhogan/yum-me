@@ -93,14 +93,14 @@ module.exports = {
       })
       .then((result) => {
         let pass = result;
-        db.query(`
+        return db.query(`
           INSERT INTO users
             (email, firstname, lastname, username, pass, loc, avatar) 
           VALUES('${email}', '${firstName}', '${lastName}', '${username}', '${pass}', '${location}', '${avatar}') 
             RETURNING *
-        ;`);
+        ;`)
       })
-      .then(data => res.status(200).send("User successfully registered."))
+      .then(data => res.status(200).send(data.rows[0]))
       .catch(err => res.status(404).send("Could not register user: ", err));
     }
   },

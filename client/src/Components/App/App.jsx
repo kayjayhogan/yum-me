@@ -10,8 +10,22 @@ class App extends React.Component {
       view: 'browse',
       currentPost: '',
       posts: [],
-      user: ''
+      user: {}
     }
+    this.changeView = this.changeView.bind(this);
+    this.changeUser = this.changeUser.bind(this);
+  }
+
+  changeView(option) {
+    this.setState({
+      view: option
+    });
+  }
+
+  changeUser(user) {
+    this.setState({
+      user: user
+    });
   }
 
   renderView() {
@@ -20,7 +34,7 @@ class App extends React.Component {
     if (view === 'landing') {
       return <Landing />
     } else if (view === 'browse') {
-      return <Browse user={this.state.user} /> 
+      return <Browse user={this.state.user} changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)}/> 
     } else if (view === 'createPost') {
       // post component
     } else if (view === 'user') {
@@ -31,6 +45,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(this.state.user)
     return(
       <div>
         {this.renderView()}

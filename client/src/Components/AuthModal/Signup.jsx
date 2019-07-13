@@ -57,11 +57,13 @@ class Signup extends React.Component {
     const { username, firstName, lastName, email, password, password2, location } = this.state;
     let avatar = response.data.url;
     axios.post('/register', { username, firstName, lastName, email, password, password2, avatar, location })
-      .then(() => {
-        console.log("Successfully registered user");
+      .then(({ data }) => {
+        this.props.changeUser(data);
       })
+      .then(this.form.reset())
+      // change where this routes
+      .then(this.props.changeView('landing'))
       .catch(err => console.log("Could not register user: ", err));
-    this.form.reset();
   }
 
   render() {
@@ -96,7 +98,7 @@ class Signup extends React.Component {
           </button>
         </form>
         <p className="account-modal-signin-label">Have an account?</p>
-        <p className="account-modal-signin" onClick={() => this.props.changeView("login")}>Sign in</p>
+        <p className="account-modal-signin" onClick={() => this.props.changeAuthView("login")}>Sign in</p>
       </div>
     );
   }

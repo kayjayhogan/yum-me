@@ -23,7 +23,7 @@ class Login extends React.Component {
             submit
           </button>      
           <p className="create-acct-label">Don't have an account yet?</p>      
-          <p className="create-acct" onClick={() => this.props.changeView("signup")}>Create one!</p>
+          <p className="create-acct" onClick={() => this.props.changeAuthView("signup")}>Create one!</p>
         </div>
       </div>
     );

@@ -28,6 +28,7 @@
   width: 45%;
   min-width: 520px; 
   height: 50vh;
+  min-height: 400px;
   max-height: 570px;
   max-width: 576px;
   margin-bottom: 10px;
@@ -132,7 +133,7 @@
   width: 45%;
   min-width: 520px; 
   max-width: 576px;
-  height: 82vh;
+  height: 650px;
   max-height: 650px;
   margin-bottom: 10px;
   padding: 2%;
