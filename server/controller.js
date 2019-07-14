@@ -11,10 +11,10 @@ module.exports = {
 
   findRecent: (req, res) => {
     db.query(`
-    SELECT * 
-      FROM posts
-    ORDER BY
-      created_at DESC
+      SELECT * 
+        FROM posts
+      ORDER BY
+        created_at DESC
     ;`)
     .then((data) => {
       res.status(200).send(data.rows);
@@ -22,6 +22,39 @@ module.exports = {
     .catch((err) => {
       res.status(400).send("Error finding recent posts: ", err);
     })
+  },
+
+  getFeed: (req, res) => {
+    let { id } = req.params;
+    db.query(`
+      SELECT followed_user_id 
+        FROM followers
+      WHERE
+        user_id = ${id}
+    ;`)
+    .then((data) => {
+      let feedUsers = [];
+      data.rows.forEach(followedUser => {
+        feedUsers.push(followedUser["followed_user_id"]);
+      });
+      return feedUsers;
+    })
+    .then((arr) => {
+      return db.query(`
+        SELECT * 
+          FROM posts 
+        WHERE 
+          author_id = ANY ($1)
+        ORDER BY
+          created_at DESC`
+        , [arr])
+    })
+    .then(data => {
+      res.status(200).send(data.rows);
+    })
+    .catch((err) => {
+      res.status(400).send("Error finding recent posts: ", err);
+    });
   },
 
 // AUTH

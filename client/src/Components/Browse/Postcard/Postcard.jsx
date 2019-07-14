@@ -26,7 +26,7 @@ class PostCard extends React.Component {
   }
 
   fetchUserInfo(user_id) {
-    axios.get(`/users/${user_id}`)
+    axios.get(`/users/${user_id}/info`)
     .then(({ data }) => {
       this.setState({
         user: data

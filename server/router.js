@@ -4,8 +4,11 @@ const controller = require('./controller.js');
 router.route('/browse')
   .get(controller.findRecent);
 
-router.route('/users/:id')
+router.route('/users/:id/info')
   .get(controller.findUserInfo);
+
+router.route('/users/:id/feed')
+  .get(controller.getFeed);
 
 router.route('/posts/:id/likes')
   .get(controller.findPostLikes);

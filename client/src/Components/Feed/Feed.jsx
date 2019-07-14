@@ -12,26 +12,17 @@ class Feed extends React.Component {
       feed: [],
       posts: 0
     }
-    this.fetchUserData = this.fetchUserData.bind(this);
     this.fetchUserFeed = this.fetchUserFeed.bind(this);
     this.fetchUserPosts = this.fetchUserPosts.bind(this);
   }
 
   componentDidMount () {
-    this.fetchUserData();
     this.fetchUserFeed();
     this.fetchUserPosts();
   }
 
-  fetchUserData () {
-    const { username } = this.props.location.state;
-    axios.get('/user', {params: {username: username}})
-    .then(({data}) => this.setState({userInfo: data[0]}))
-    .catch(err => console.error('Error with get user info'))
-  }
-
   fetchUserFeed () {
-    const { username } = this.props.location.state;
+    const { id } = this.state.user;
     axios.get('/feed', {params: {username: username}})
     .then(({data}) => this.setState({feed: data}))
     .catch(err => console.error('Error with get user info'))
@@ -45,7 +36,7 @@ class Feed extends React.Component {
   }
 
   render () {
-    const { firstName, lastName, username, avatar, following, followers} = this.state.userInfo;
+    const { firstName, lastName, username, avatar, following, followers} = this.state.user;
     const { feed } = this.state;
     const followingNum = following ? following.length : null;
     const feedSection = this.state.feed.length > 0 ? 
@@ -65,7 +56,7 @@ class Feed extends React.Component {
       </div>
     return (
       <div>
-        <Navbar username={this.props.location.state.username} avatar={this.props.location.state.avatar}/>
+        <Navbar username={this.state.user.username} avatar={this.state.user.avatar}/>
         <div className="feed-main">
           <div className="user-info">
             <div className="user-info-inner">
