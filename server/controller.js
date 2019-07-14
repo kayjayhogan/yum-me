@@ -158,23 +158,18 @@ module.exports = {
   register: (req, res) => {
     const { username, firstName, lastName, email, password, password2, avatar, location } = req.body;
     let errors = [];
-
     if (!username || !firstName || !lastName || !email || !password || !password2 || !avatar || !location) {
       errors.push({ msg: "Please enter all fields."});
     }
-
     if (password !== password2) {
       errors.push({ msg: "Passwords do not match."});
     }
-
     if (password.length < 6) {
       errors.push({ msg: "Password must be at least 6 characters."});
     }
-
     if (errors.length > 0) {
       res.status(404).send("Please enter all fields.")
     } else {
-
       // MAKING PROMISES OF BCRYPT FUNCTIONS
       // ---------------------------------
       generateSalt = (password) => {
@@ -189,7 +184,6 @@ module.exports = {
           });
         });
       }
-
       generateHash = (salt, password) => {
         return new Promise((resolve, reject) => {
           bcrypt.hash(password, salt, (err, hash) => {
