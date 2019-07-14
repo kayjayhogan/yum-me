@@ -1,6 +1,7 @@
 import React from 'react';
 import Landing from '../Landing/Landing.jsx';
 import Browse from '../Browse/Browse.jsx';
+import Feed from '../Feed/Feed.jsx';
 import './App.css';
 
 class App extends React.Component {
@@ -40,12 +41,11 @@ class App extends React.Component {
     } else if (view === 'user') {
       // user component
     } else if (view === 'feed') {
-      // feed component
+      return <Feed user={this.state.user} changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)}/>
     } 
   }
 
   render() {
-    console.log(this.state.user)
     return(
       <div>
         {this.renderView()}
