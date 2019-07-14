@@ -10,18 +10,24 @@ class Feed extends React.Component {
     this.state = {
       user: this.props.user,
       feed: [],
+      followers: 0,
+      following: 0,
       posts: 0
     }
     this.fetchUserFeed = this.fetchUserFeed.bind(this);
     this.fetchUserPosts = this.fetchUserPosts.bind(this);
+    this.fetchFollowers = this.fetchFollowers.bind(this);
+    this.fetchFollowing = this.fetchFollowing.bind(this);
   }
 
   componentDidMount () {
     this.fetchUserFeed();
     this.fetchUserPosts();
+    this.fetchFollowers();
+    this.fetchFollowing();
   }
 
-  fetchUserFeed () {
+  fetchUserFeed() {
     const { id } = this.state.user;
     axios.get(`/users/${id}/feed`)
     .then(({ data }) => this.setState({
@@ -30,7 +36,7 @@ class Feed extends React.Component {
     .catch(err => console.error('Error fetching user\'s feed: ', err));
   }
 
-  fetchUserPosts () {
+  fetchUserPosts() {
     const { id } = this.state.user;
     axios.get(`/users/${id}/posts`)
     .then(({ data }) => this.setState({
@@ -39,13 +45,30 @@ class Feed extends React.Component {
     .catch(err => console.error('Error getting user\'s posts: ', err));
   }
 
+  fetchFollowers() {
+    const { id } = this.state.user;
+    axios.get(`/users/${id}/followers`)
+    .then(({ data }) => this.setState({
+      followers: data.length
+    }))
+    .catch(err => console.error('Error getting user\'s followers: ', err));
+  }
+
+  fetchFollowing() {
+    const { id } = this.state.user;
+    axios.get(`/users/${id}/following`)
+    .then(({ data }) => this.setState({
+      following: data.length
+    }))
+    .catch(err => console.error('Error getting user\'s followers: ', err));
+  }
+
   render () {
     const { firstName, lastName, username, avatar } = this.state.user;
-    const { feed } = this.state;
-    const followingNum = following ? following.length : null;
+    const { feed, following, followers } = this.state;
     const feedSection = this.state.feed.length > 0 ? 
       <div className="feed-post-main">
-        {feed.map((item, index) => <FeedPost item={item} key={index} currentUser={this.props.location.state.username} currentAvatar={this.props.location.state.avatar}/>)}
+        {feed.map((post, i) => <FeedPost post={post} key={i} currentUser={username} currentAvatar={avatar}/>)}
       </div> : 
       <div className="feed-post-main">
         <div className="feed-no-feed">
@@ -60,7 +83,7 @@ class Feed extends React.Component {
       </div>
     return (
       <div>
-        <Navbar username={this.state.user.username} avatar={this.state.user.avatar}/>
+        <Navbar username={username} avatar={avatar}/>
         <div className="feed-main">
           <div className="user-info">
             <div className="user-info-inner">
@@ -73,7 +96,7 @@ class Feed extends React.Component {
               <div className="feed-user-info-details">
                 <p><span>{this.state.posts}</span> posts</p>
                 <p><span>{followers}</span> followers</p>
-                <p><span>{followingNum}</span> following</p>
+                <p><span>{following}</span> following</p>
               </div>
             </div>
           </div>
