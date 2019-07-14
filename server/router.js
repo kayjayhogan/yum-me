@@ -8,7 +8,16 @@ router.route('/users/:id/info')
   .get(controller.findUserInfo);
 
 router.route('/users/:id/feed')
-  .get(controller.getFeed);
+  .get(controller.findFeed);
+
+router.route('/users/:id/posts')
+  .get(controller.findUserPosts);
+
+router.route('/users/:id/followers')
+  .get(controller.findFollowers);
+
+router.route('/users/:id/following')
+  .get(controller.findFollowing);
 
 router.route('/posts/:id/likes')
   .get(controller.findPostLikes);

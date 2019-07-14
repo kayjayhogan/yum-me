@@ -9,6 +9,7 @@ let escapeRegex = (text) => {
 
 module.exports = { 
 
+  // find recent posts made by anyone
   findRecent: (req, res) => {
     db.query(`
       SELECT * 
@@ -23,8 +24,8 @@ module.exports = {
       res.status(400).send("Error finding recent posts: ", err);
     })
   },
-
-  getFeed: (req, res) => {
+  // retrieve feed of posts from people you follow
+  findFeed: (req, res) => {
     let { id } = req.params;
     db.query(`
       SELECT followed_user_id 
@@ -47,7 +48,7 @@ module.exports = {
           author_id = ANY ($1)
         ORDER BY
           created_at DESC`
-        , [arr])
+        , [arr]);
     })
     .then(data => {
       res.status(200).send(data.rows);
@@ -56,8 +57,103 @@ module.exports = {
       res.status(400).send("Error finding recent posts: ", err);
     });
   },
-
-// AUTH
+  // get info of one user
+  findUserInfo: (req, res) => {
+    let { id } = req.params;
+    db.query(`
+      SELECT *
+        FROM users
+      WHERE
+        id = ${id}
+    ;`)
+    .then((data) => {
+      res.status(200).send(data.rows[0]);
+    })
+    .catch((err) => {
+      res.status(400).send("Error finding user info: ", err);
+    })
+  },
+  // get posts made by a given user
+  findUserPosts: (req, res) => {
+    let { id } = req.params;
+    db.query(`
+      SELECT *
+        FROM posts
+      WHERE
+        author_id = ${id}
+    ;`)
+    .then((data) => {
+      res.status(200).send(data.rows);
+    })
+    .catch((err) => {
+      res.status(400).send("Error finding user's posts': ", err);
+    })
+  },
+  // get likes of a post
+  findPostLikes: (req, res) => {
+    let { id } = req.params;
+    db.query(`
+      SELECT *
+        FROM likes
+      WHERE
+        post_id = ${id}
+    ;`)
+    .then((data) => {
+      res.status(200).send(data.rows);
+    })
+    .catch((err) => {
+      res.status(400).send("Error finding post likes: ", err);
+    })
+  },
+  // get comments of a post
+  findPostComments: (req, res) => {
+    let { id } = req.params;
+    db.query(`
+      SELECT *
+        FROM comments
+      WHERE
+        post_id = ${id}
+    ;`)
+    .then((data) => {
+      res.status(200).send(data.rows);
+    })
+    .catch((err) => {
+      res.status(400).send("Error finding post comments: ", err);
+    })
+  },
+  // get user's followers
+  findFollowers: (req, res) => {
+    let { id } = req.params;
+    db.query(`
+      SELECT user_id 
+        FROM followers
+      WHERE
+        followed_user_id = ${id}
+    ;`)
+    .then(data => {
+      res.status(200).send(data.rows);
+    })
+    .catch(err => {
+      res.status(404).send("Error finding followers: ", err);
+    })
+  },  
+  // get those a user is following
+  findFollowing: (req, res) => {
+    let { id } = req.params;
+    db.query(`
+      SELECT followed_user_id 
+        FROM followers
+      WHERE
+        user_id = ${id}
+    ;`)
+    .then(data => {
+      res.status(200).send(data.rows);
+    })
+    .catch(err => {
+      res.status(404).send("Error finding followed users: ", err);
+    })
+  },
+// AUTHENTICATION
 
   register: (req, res) => {
     const { username, firstName, lastName, email, password, password2, avatar, location } = req.body;
@@ -136,56 +232,6 @@ module.exports = {
       .then(data => res.status(200).send(data.rows[0]))
       .catch(err => res.status(404).send("Could not register user: ", err));
     }
-  },
-
-// UTILITY FETCH FUNCTIONS
-
-  findUserInfo: (req, res) => {
-    let { id } = req.params;
-    db.query(`
-      SELECT *
-        FROM users
-      WHERE
-        id = ${id}
-    ;`)
-    .then((data) => {
-      res.status(200).send(data.rows[0]);
-    })
-    .catch((err) => {
-      res.status(400).send("Error finding user info: ", err);
-    })
-  },
-
-  findPostLikes: (req, res) => {
-    let { id } = req.params;
-    db.query(`
-      SELECT *
-        FROM likes
-      WHERE
-        post_id = ${id}
-    ;`)
-    .then((data) => {
-      res.status(200).send(data.rows);
-    })
-    .catch((err) => {
-      res.status(400).send("Error finding user info: ", err);
-    })
-  },
-
-  findPostComments: (req, res) => {
-    let { id } = req.params;
-    db.query(`
-      SELECT *
-        FROM comments
-      WHERE
-        post_id = ${id}
-    ;`)
-    .then((data) => {
-      res.status(200).send(data.rows);
-    })
-    .catch((err) => {
-      res.status(400).send("Error finding user info: ", err);
-    })
   }
 
 }

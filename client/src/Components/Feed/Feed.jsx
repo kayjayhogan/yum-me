@@ -23,20 +23,24 @@ class Feed extends React.Component {
 
   fetchUserFeed () {
     const { id } = this.state.user;
-    axios.get('/feed', {params: {username: username}})
-    .then(({data}) => this.setState({feed: data}))
-    .catch(err => console.error('Error with get user info'))
+    axios.get(`/users/${id}/feed`)
+    .then(({ data }) => this.setState({
+      feed: data
+    }))
+    .catch(err => console.error('Error fetching user\'s feed: ', err));
   }
 
   fetchUserPosts () {
-    const { username } = this.props.location.state;
-    axios.get('/userPosts', {params: {username: username}})
-    .then(({data}) => this.setState({posts: data.length}))
-    .catch(err => console.error('Error with get user info'))
+    const { id } = this.state.user;
+    axios.get(`/users/${id}/posts`)
+    .then(({ data }) => this.setState({
+      posts: data.length
+    }))
+    .catch(err => console.error('Error getting user\'s posts: ', err));
   }
 
   render () {
-    const { firstName, lastName, username, avatar, following, followers} = this.state.user;
+    const { firstName, lastName, username, avatar } = this.state.user;
     const { feed } = this.state;
     const followingNum = following ? following.length : null;
     const feedSection = this.state.feed.length > 0 ? 
