@@ -4,13 +4,13 @@ const controller = require('./controller.js');
 router.route('/browse')
   .get(controller.findRecent);
 
-router.route('/user_info')
+router.route('/users/:id')
   .get(controller.findUserInfo);
 
-router.route('/post_likes')
+router.route('/posts/:id/likes')
   .get(controller.findPostLikes);
 
-router.route('/post_comments')
+router.route('/posts/:id/comments')
   .get(controller.findPostComments);
 
 router.route('/register')

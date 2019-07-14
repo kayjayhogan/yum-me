@@ -108,7 +108,7 @@ module.exports = {
 // UTILITY FETCH FUNCTIONS
 
   findUserInfo: (req, res) => {
-    let { id } = req.query;
+    let { id } = req.params;
     db.query(`
       SELECT *
         FROM users
@@ -124,12 +124,12 @@ module.exports = {
   },
 
   findPostLikes: (req, res) => {
-    let { id } = req.query;
+    let { id } = req.params;
     db.query(`
       SELECT *
-        FROM posts
+        FROM likes
       WHERE
-        id = ${id}
+        post_id = ${id}
     ;`)
     .then((data) => {
       res.status(200).send(data.rows);
@@ -140,12 +140,12 @@ module.exports = {
   },
 
   findPostComments: (req, res) => {
-    let { id } = req.query;
+    let { id } = req.params;
     db.query(`
       SELECT *
         FROM comments
       WHERE
-        id = ${id}
+        post_id = ${id}
     ;`)
     .then((data) => {
       res.status(200).send(data.rows);

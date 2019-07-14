@@ -26,11 +26,7 @@ class PostCard extends React.Component {
   }
 
   fetchUserInfo(user_id) {
-    axios.get('/user_info', {
-      params: {
-        id: user_id
-      }
-    })
+    axios.get(`/users/${user_id}`)
     .then(({ data }) => {
       this.setState({
         user: data
@@ -42,11 +38,7 @@ class PostCard extends React.Component {
   }
 
   fetchLikes(post_id) {
-    axios.get('/post_likes', {
-      params: {
-        id: post_id
-      }
-    })
+    axios.get(`/posts/${post_id}/likes`)
     .then(({ data }) => {
       this.setState({
         likes: data.length
@@ -58,11 +50,7 @@ class PostCard extends React.Component {
   }
 
   fetchComments(post_id) {
-    axios.get('/post_comments', {
-      params: {
-        id: post_id
-      }
-    })
+    axios.get(`/posts/${post_id}/comments`)
     .then(({ data }) => {
       this.setState({
         comments: data.length
