@@ -28,7 +28,8 @@ class Feed extends React.Component {
   }
 
   fetchUserFeed() {
-    const { id } = this.state.user;
+    // const { id } = this.state.user;
+    let id = 3;
     axios.get(`/users/${id}/feed`)
     .then(({ data }) => this.setState({
       feed: data
@@ -37,7 +38,8 @@ class Feed extends React.Component {
   }
 
   fetchUserPosts() {
-    const { id } = this.state.user;
+    // const { id } = this.state.user;
+    let id = 3;
     axios.get(`/users/${id}/posts`)
     .then(({ data }) => this.setState({
       posts: data.length
@@ -46,7 +48,8 @@ class Feed extends React.Component {
   }
 
   fetchFollowers() {
-    const { id } = this.state.user;
+    // const { id } = this.state.user;
+    let id = 3;
     axios.get(`/users/${id}/followers`)
     .then(({ data }) => this.setState({
       followers: data.length
@@ -55,12 +58,13 @@ class Feed extends React.Component {
   }
 
   fetchFollowing() {
-    const { id } = this.state.user;
+    // const { id } = this.state.user;
+    let id = 3;
     axios.get(`/users/${id}/following`)
     .then(({ data }) => this.setState({
       following: data.length
     }))
-    .catch(err => console.error('Error getting user\'s followers: ', err));
+    .catch(err => console.error('Error getting user\'s following: ', err));
   }
 
   render () {
@@ -88,10 +92,13 @@ class Feed extends React.Component {
           <div className="user-info">
             <div className="user-info-inner">
               <div className="feed-stripe"></div>
-              <img className="avatar-photo" src={avatar} />
+              {/* <img className="avatar-photo" src={avatar} /> */}
+              <img className="avatar-photo" src='https://res.cloudinary.com/kjhogan/image/upload/v1563005842/cxnlqccy23gnktlzacth.jpg' />
               <div className="feed-name">
-                <h4>{firstName} {lastName}</h4>
-                <p>@{username}</p>
+                {/* <h4>{firstName} {lastName}</h4> */}
+                <h4>John Smith</h4>
+                {/* <p>@{username}</p> */}
+                <p>@usernametest</p>
               </div>
               <div className="feed-user-info-details">
                 <p><span>{this.state.posts}</span> posts</p>
