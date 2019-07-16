@@ -155,6 +155,41 @@ module.exports = {
   },
 // AUTHENTICATION
 
+  login: (req, res) => {
+    const { email, password } = req.body;
+    // MAKE PROMISE OF BCRYPT COMPARE
+    checkPassword = (password, hash) => {
+      return new Promise((resolve, reject) => {
+        bcrypt.compare(password, hash, (err, res) => {            
+          if (err) {
+            reject(err);
+          } 
+          else {
+            resolve(res);        
+          }            
+        });
+      });
+    }
+    db.query(`
+      SELECT * 
+        FROM users
+      WHERE
+        email = '${email}'
+    ;`)
+    .then(data => {
+      if(!data.rows[0]) {
+        res.status(404).send("No email found.");
+      }
+      if(checkPassword(password, data.rows[0].pass)) {
+        return data.rows[0];
+      }
+    })
+    .then((data) => res.status(200).send(data))
+    .catch(err => {
+      res.status(404).send("Error logging in: ", err);
+    })
+  },
+
   register: (req, res) => {
     const { username, firstName, lastName, email, password, password2, avatar, location } = req.body;
     let errors = [];

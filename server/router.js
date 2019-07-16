@@ -28,4 +28,7 @@ router.route('/posts/:id/comments')
 router.route('/register')
   .post(controller.register);
 
+router.route('/login')
+  .post(controller.login);
+
 module.exports = router;
