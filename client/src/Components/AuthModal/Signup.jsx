@@ -57,12 +57,11 @@ class Signup extends React.Component {
     const { username, firstName, lastName, email, password, password2, location } = this.state;
     let avatar = response.data.url;
     axios.post('/register', { username, firstName, lastName, email, password, password2, avatar, location })
-      .then(({ data }) => {
-        this.props.changeUser(data);
+      .then(async ({ data }) => {
+        await this.props.changeUser(data);
+        this.props.changeView('feed');
       })
       .then(this.form.reset())
-      // change where this routes
-      .then(this.props.changeView('landing'))
       .catch(err => console.log("Could not register user: ", err));
   }
 

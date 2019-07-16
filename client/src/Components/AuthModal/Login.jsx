@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { MdClose } from 'react-icons/md';
 import './Auth.css';
 
@@ -6,6 +7,29 @@ class Login extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      email: '',
+      password: ''
+    }
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    const { email, password } = this.state;
+    axios.post('/login', { email, password })
+      .then(async ({ data }) => {
+        await this.props.changeUser(data);
+        this.props.changeView('feed');
+      })
+      .catch(err => console.log("Could not login user: ", err));
   }
 
   render() {
@@ -17,11 +41,13 @@ class Login extends React.Component {
           <h3>Log In</h3>
         </div>
         <div className="signin-form">
-          <input className="signin-form-input" type="text" placeholder="Email"></input>
-          <input className="signin-form-input" type="password" placeholder="Password"></input>
-          <button className="nav-modal-signin-btn">
-            submit
-          </button>      
+          <form onSubmit={this.handleSubmit}>
+            <input name="email" className="signin-form-input" type="text" placeholder="Email" onChange={this.handleChange}></input>
+            <input name="password" className="signin-form-input" type="password" placeholder="Password" onChange={this.handleChange}></input>
+            <button type="submit" className="nav-modal-signin-btn">
+              submit
+            </button>                  
+          </form>
           <p className="create-acct-label">Don't have an account yet?</p>      
           <p className="create-acct" onClick={() => this.props.changeAuthView("signup")}>Create one!</p>
         </div>
