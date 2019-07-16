@@ -21,7 +21,6 @@ class Feed extends React.Component {
   }
 
   componentDidMount () {
-    console.log(this.props.user);
     this.fetchUserFeed();
     this.fetchUserPosts();
     this.fetchFollowers();
@@ -65,7 +64,7 @@ class Feed extends React.Component {
   }
 
   render () {
-    const { firstName, lastName, username, avatar } = this.state.user;
+    const { firstname, lastname, username, avatar } = this.state.user;
     const { feed, following, followers } = this.state;
     const feedSection = this.state.feed.length > 0 ? 
       <div className="feed-post-main">
@@ -91,7 +90,7 @@ class Feed extends React.Component {
               <div className="feed-stripe"></div>
               <img className="avatar-photo" src={avatar} />
               <div className="feed-name">
-                <h4>{firstName} {lastName}</h4>
+                <h4>{firstname} {lastname}</h4>
                 <p>@{username}</p>
               </div>
               <div className="feed-user-info-details">
