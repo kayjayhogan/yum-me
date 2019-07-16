@@ -26,7 +26,7 @@ class Landing extends React.Component {
 
   render() {
     const modal = this.state.showModal ? 
-    (<AuthModal handleHide={this.handleHideModal}></AuthModal>) : null;
+    (<AuthModal handleHide={this.handleHideModal} changeView={(option) => this.props.changeView(option)} changeUser={(user) => this.props.changeUser(user)}></AuthModal>) : null;
 
     return(
       <div className="landing-body">
