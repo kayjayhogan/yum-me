@@ -67,7 +67,7 @@ class FeedPost extends React.Component {
             <img className="post-avatar" src={this.state.author.avatar}></img>
             <div>
               {/* INSERT USER PROFILE LINK BELOW */}
-                {this.state.author.username}
+              <a>{this.state.author.username}</a>                
               <p><strong>Restaurant: </strong>{restaurant}</p>
             </div>
             <div className="recommend-img-container">{recommendImage}</div>          
@@ -78,7 +78,7 @@ class FeedPost extends React.Component {
             <p>{descript.slice(0,200)}...</p>
             <div className="post-detail">
               <div><span><FaThumbsUp /></span> {this.state.likes} </div>
-              <div><span><FaCommentAlt className="post-card-comment-icon" /></span> {this.state.comments.length}</div>
+              <div><span><FaCommentAlt className="post-card-comment-icon" /></span> {this.state.comments}</div>
               <p>{moment(created_at).fromNow()}</p>
             </div>
           </div>

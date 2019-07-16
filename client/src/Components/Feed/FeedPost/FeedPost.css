@@ -33,6 +33,8 @@
   text-decoration: none;
   font-weight: bold;
   font-size: 1.1em;
+  cursor: pointer;
+  color: #3b1360;
 }
 
 .feed-post-user-stripe a:hover {
