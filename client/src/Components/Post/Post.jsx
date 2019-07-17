@@ -16,6 +16,7 @@ class Post extends React.Component {
       like: false
     }
     this.fetchComments = this.fetchComments.bind(this);
+    this.fetchAuthor = this.fetchAuthor.bind(this);
     // this.handleChange = this.handleChange.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
     // this.handleLikePost = this.handleLikePost.bind(this);
@@ -23,11 +24,11 @@ class Post extends React.Component {
 
   componentDidMount() {
     this.fetchComments();
+    this.fetchAuthor();
   }
 
   fetchComments() {
-    // const { id } = this.props.post;
-    const id = 4;
+    const { id } = this.props.post;
     axios.get(`/posts/${id}/comments`)
     .then(({ data }) => {
       return data.sort((a, b) => {
@@ -43,8 +44,7 @@ class Post extends React.Component {
   }
 
   fetchAuthor() {
-    // const id = this.props.post['author_id'];
-    const id = 1;
+    const id = this.props.post['author_id'];
     axios.get(`/users/${id}/info`)
     .then(({ data }) => {
       this.setState({
@@ -88,27 +88,9 @@ class Post extends React.Component {
   // }
 
   render () {
-    // const { username, avatar } = this.props.user;
-    const username = 'love_my_cats';
-    const avatar = 'https://res.cloudinary.com/kjhogan/image/upload/v1563005842/cxnlqccy23gnktlzacth.jpg';
-    let testpost = {
-      "id": 4,
-      "title": "You Honestly Need to Try These Wraps",
-      "author_id": 1,
-      "restaurant": "Mahogany",
-      "descript": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed elementum tempus egestas. Pharetra sit amet aliquam id diam maecenas ultricies mi.",
-      "recommended": true,
-      "created_at": "2019-07-10T02:49:36.964Z",
-      "img_url": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
-    }
-    let testauthor = {
-      username: "kjhogan",
-      avatar: "https://avatars2.githubusercontent.com/u/25232945?s=460&v=4"
-    }
-    const { created_at, img_url, recommended, restaurant, descript, title } = testpost;
-    // const { comments, author } = this.state;
-    const { comments } = this.state;
-    const author = testauthor;
+    const { username, avatar } = this.props.user;
+    const { created_at, img_url, recommended, restaurant, descript, title } = this.props.post;
+    const { comments, author } = this.state;
     const commentSection = comments.length > 0 ? 
       <div className="show-post-comments">
         {/* {comments.map((comment, index) => <PostComment comment={comment} key={index} currentUser={username} currentAvatar={avatar}/>)} */}
@@ -121,7 +103,7 @@ class Post extends React.Component {
       <img className="post-recommend-img" src="https://res.cloudinary.com/kjhogan/image/upload/v1562452169/yumme_4_ukpyej.png"></img> :
       <img className="post-recommend-img" src="https://res.cloudinary.com/kjhogan/image/upload/v1562452170/yumme_2_wphphq.png"></img>
     const likeIcon = this.state.like ? <FaThumbsUp className="post-like-icon-activated" /> : <FaThumbsUp className="post-like-icon" />;
-    const commentBox = username.length > 0 ? 
+    const commentBox = username ? 
       <form>
         {/* <textarea className="comment-input" id="comment-input" name="text" placeholder="Write a comment..." onChange={this.handleChange}/> */}
         {/* <button type="submit" onClick={this.handleSubmit}><FaTelegramPlane /></button> */}
@@ -133,7 +115,7 @@ class Post extends React.Component {
       </div>
     return (
       <div> 
-        <NavBar username={username} avatar={avatar}/>
+        <NavBar username={username} avatar={avatar} changeView={(option) => this.props.changeView(option)} changeUser={(user) => this.props.changeUser(user)}/>
         <div className="show-post-container">
           <div className="show-post-main">
             <div className="show-post-post-container">

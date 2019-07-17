@@ -60,7 +60,7 @@ class Navbar extends React.Component {
       <ul className="main-nav" id="js-menu">
         <div>
           <li>
-            <a href="#" className="nav-links">browse</a>
+            <a onClick={(option) => this.props.changeView('browse')} className="nav-links">browse</a>
           </li>     
         </div>
         <div>
@@ -82,7 +82,7 @@ class Navbar extends React.Component {
       <ul className="main-nav" id="js-menu">
         <div>
           <li>
-            <a href="#" className="nav-links">browse</a>
+            <a onClick={(option) => this.props.changeView('browse')} className="nav-links">browse</a>
           </li>     
         </div>
         <div>

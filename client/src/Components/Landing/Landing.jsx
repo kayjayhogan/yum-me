@@ -42,10 +42,10 @@ class Landing extends React.Component {
             </div>
           </div>
           <div className="landing-button-container">
-            <a href="#">
+            <a onClick={(option) => this.props.changeView('browse')} >
               <button className="button-main">see what's new</button>
             </a>
-            <a href="#" onClick={this.handleShowModal}>
+            <a onClick={this.handleShowModal}>
                 <button className="button-foil">log in</button>
             </a>
           </div>
