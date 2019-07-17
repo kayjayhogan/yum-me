@@ -18,6 +18,7 @@
 
 .post-image {
   width: 100%;
+  cursor: pointer;
 }
 
 .feed-post-user-stripe {
