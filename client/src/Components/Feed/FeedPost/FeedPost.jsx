@@ -74,7 +74,7 @@ class FeedPost extends React.Component {
           </div>
           <img className="post-image" src={img_url} />
           <div className="post-well">
-            <h3>{title}</h3>
+            <h3 onClick={(post) => this.props.renderPost(this.props.post)}>{title}</h3>
             <p>{descript.slice(0,200)}...</p>
             <div className="post-detail">
               <div><span><FaThumbsUp /></span> {this.state.likes} </div>

@@ -68,7 +68,7 @@ class Feed extends React.Component {
     const { feed, following, followers } = this.state;
     const feedSection = this.state.feed.length > 0 ? 
       <div className="feed-post-main">
-        {feed.map((post, i) => <FeedPost post={post} key={i} currentUser={username} currentAvatar={avatar}/>)}
+        {feed.map((post, i) => <FeedPost post={post} key={i} currentUser={username} currentAvatar={avatar} renderPost={(post) => this.props.renderPost(post)}/>)}
       </div> : 
       <div className="feed-post-main">
         <div className="feed-no-feed">
@@ -83,7 +83,7 @@ class Feed extends React.Component {
       </div>
     return (
       <div>
-        <Navbar username={username} avatar={avatar}/>
+        <Navbar username={username} avatar={avatar} changeView={(option) => this.props.changeView(option)} changeUser={(user) => this.props.changeUser(user)}/>
         <div className="feed-main">
           <div className="user-info">
             <div className="user-info-inner">
