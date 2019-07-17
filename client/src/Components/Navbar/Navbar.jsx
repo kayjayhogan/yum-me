@@ -53,6 +53,8 @@ class Navbar extends React.Component {
     const modal = this.state.showModal ? 
     (<AuthModal handleHide={this.handleHideModal} changeView={(option) => this.props.changeView(option)} changeUser={(user) => this.props.changeUser(user)}></AuthModal>) : null;
    
+    const clickLogoView = this.state.username ? 'browse' : 'landing';
+
     return(
       <div>
         {modal}
@@ -60,11 +62,11 @@ class Navbar extends React.Component {
           <span className="navbar-toggle" onClick={this.handleMenu}>
             <FaBars />
           </span>
-          <div>
-            <a href="#" className="nav-logo">
+          <div className="nav-logo-container" onClick={(option) => this.props.changeView(clickLogoView)}>
+            <a className="nav-logo">
               <img src="https://res.cloudinary.com/kjhogan/image/upload/v1562452169/yumme_logo_white_plvcb7.png"></img>        
             </a>
-            <a href="#" className="nav-logo">
+            <a className="nav-logo">
               yum.me      
             </a>
           </div>

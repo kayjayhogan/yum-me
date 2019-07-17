@@ -16,6 +16,10 @@
   display: none;
 }
 
+.nav-logo-container {
+  cursor: pointer;
+}
+
 .nav-links,
 .nav-logo {
   text-decoration: none;
