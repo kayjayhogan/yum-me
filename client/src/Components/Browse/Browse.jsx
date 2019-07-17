@@ -33,7 +33,7 @@ class Browse extends React.Component {
         <div className="browse-wrap">
           <div className="four-col-grid">
             {this.state.posts.map((post, i) => {
-              return <div className="grid-item hvr-grow" key={i}><PostCard post={post} /></div>               
+              return <div className="grid-item hvr-grow" key={i} onClick={(post) => this.props.renderPost(post)}><PostCard post={post} /></div>               
             })}
           </div>
         </div>
