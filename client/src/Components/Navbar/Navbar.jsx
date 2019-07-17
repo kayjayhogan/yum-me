@@ -53,7 +53,7 @@ class Navbar extends React.Component {
     const modal = this.state.showModal ? 
     (<AuthModal handleHide={this.handleHideModal} changeView={(option) => this.props.changeView(option)} changeUser={(user) => this.props.changeUser(user)}></AuthModal>) : null;
    
-    const clickLogoView = this.state.username ? 'browse' : 'landing';
+    const clickLogoView = this.state.username ? 'feed' : 'landing';
 
     // rightmost part of navbar, depending on whether logged in
     const mainNav = this.state.username ? 
