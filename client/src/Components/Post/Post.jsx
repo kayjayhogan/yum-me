@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import NavBar from '../Navbar/Navbar';
+import AuthModal from '../AuthModal/AuthModal';
 import Comment from './Comment/Comment.jsx'
 import './Post.css';
 import moment from 'moment';
@@ -13,10 +14,13 @@ class Post extends React.Component {
       author: {},
       comments: [], 
       text: '', 
-      like: false
+      like: false,
+      showModal: false
     }
     this.fetchComments = this.fetchComments.bind(this);
     this.fetchAuthor = this.fetchAuthor.bind(this);
+    this.handleShowModal = this.handleShowModal.bind(this);
+    this.handleHideModal = this.handleHideModal.bind(this);
     // this.handleChange = this.handleChange.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
     // this.handleLikePost = this.handleLikePost.bind(this);
@@ -54,6 +58,18 @@ class Post extends React.Component {
     .catch(err => console.log('Error finding post author details: ', err));
   }
 
+  handleShowModal() {
+    this.setState({
+      showModal: true
+    });
+  }
+
+  handleHideModal() {
+    this.setState({
+      showModal: false
+    });
+  }
+
   // handleChange (e) {
   //   this.setState({
   //     [e.target.name]: e.target.value
@@ -88,6 +104,9 @@ class Post extends React.Component {
   // }
 
   render () {
+    const modal = this.state.showModal ? 
+      (<AuthModal handleHide={this.handleHideModal} changeView={(option) => this.props.changeView(option)} changeUser={(user) => this.props.changeUser(user)}></AuthModal>) : null;
+
     const { username, avatar } = this.props.user;
     const { created_at, img_url, recommended, restaurant, descript, title } = this.props.post;
     const { comments, author } = this.state;
@@ -110,11 +129,12 @@ class Post extends React.Component {
       </form> :
       <div className="cannot-comment">
         <p><em>Please </em> 
-          <span className="cannot-comment-login">log in</span>
+          <span onClick={this.handleShowModal} className="cannot-comment-login">log in</span>
         <em> to comment.</em></p>
       </div>
     return (
       <div> 
+        {modal}
         <NavBar username={username} avatar={avatar} changeView={(option) => this.props.changeView(option)} changeUser={(user) => this.props.changeUser(user)}/>
         <div className="show-post-container">
           <div className="show-post-main">

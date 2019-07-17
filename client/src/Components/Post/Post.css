@@ -131,6 +131,7 @@
 .cannot-comment-login {
   color: #3b1360;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .post-comment-icon {
