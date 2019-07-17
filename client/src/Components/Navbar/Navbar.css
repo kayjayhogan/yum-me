@@ -58,7 +58,7 @@
   display: block;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 865px) {
   .navbar {
     display: flex;
     justify-content: space-between;
@@ -80,6 +80,7 @@
 
   .nav-links {
     margin-left: 40px;
+    cursor: pointer;
   }
 
   .nav-logo {
@@ -135,6 +136,6 @@
 
 @media screen and (min-width: 1025px) {
   .nav-search-input-container {
-    width: 40%;
+    width: 30%;
   }
 }

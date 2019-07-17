@@ -55,6 +55,48 @@ class Navbar extends React.Component {
    
     const clickLogoView = this.state.username ? 'browse' : 'landing';
 
+    // rightmost part of navbar, depending on whether logged in
+    const mainNav = this.state.username ? 
+      <ul className="main-nav" id="js-menu">
+        <div>
+          <li>
+            <a href="#" className="nav-links">browse</a>
+          </li>     
+        </div>
+        <div>
+          <li>
+            <a href="#" className="nav-links">create post</a>
+          </li>     
+        </div>
+        <div>
+          <li>
+            <a className="nav-links">log out</a>
+          </li>
+        </div>
+        <div>
+          <li>
+            <a className="nav-links"><FaUser /> {this.state.username}</a>
+          </li>
+        </div>
+      </ul> :
+      <ul className="main-nav" id="js-menu">
+        <div>
+          <li>
+            <a href="#" className="nav-links">browse</a>
+          </li>     
+        </div>
+        <div>
+          <li>
+            <a href="#" className="nav-links">create post</a>
+          </li>     
+        </div>
+        <div>
+          <li>
+            <a className="nav-links" onClick={this.handleShowModal}>log in</a>
+          </li>
+        </div>
+      </ul>
+
     return(
       <div>
         {modal}
@@ -78,23 +120,7 @@ class Navbar extends React.Component {
               </form>
             </div>
           </div>
-          <ul className="main-nav" id="js-menu">
-            <div>
-              <li>
-                <a href="#" className="nav-links">browse</a>
-              </li>     
-            </div>
-            <div>
-              <li>
-                <a href="#" className="nav-links">create post</a>
-              </li>     
-            </div>
-            <div>
-              <li>
-                <a href="#" className="nav-links" onClick={this.handleShowModal}>log in</a>
-              </li>
-            </div>
-          </ul>
+          {mainNav}
         </nav>
       </div>
     );
