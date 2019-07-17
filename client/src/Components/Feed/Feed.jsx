@@ -75,7 +75,7 @@ class Feed extends React.Component {
           <h3>It looks like you're not following anyone yet!</h3>
           <div className="feed-no-feed-browse">
             <p> 
-              <span>Browse </span>
+              <span onClick={() => this.props.changeView('browse')}>Browse </span>
               some posts to find people to follow.
             </p>
           </div>
