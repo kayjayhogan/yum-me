@@ -1,0 +1,190 @@
+.show-post-container {
+  padding-top: 70px;
+  color: rgb(37, 37, 37);
+}
+
+.show-post-main {
+  margin: 30px 70px;
+  background-color: white;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 4px;
+  display: flex;
+  min-width: 700px;
+}
+
+.show-post-post-container {
+  flex: 2;
+  border-right: 1px solid rgba(0,0,0,0.2);
+  padding: 20px;
+}
+
+.show-post-content {
+  padding: 10px 20px 20px 20px;
+}
+
+.show-post-content h1 {
+  color: #3b1360;
+  cursor: default;
+  margin-bottom: 0;
+  font-size: 1.7em;
+}
+
+.show-post-restaurant {
+  font-size: 1.2em;
+  margin-top: 20px;
+  cursor: default;
+}
+
+.show-post-restaurant span {
+  color: #3b1360;
+}
+
+.show-post-comments-container {
+  flex: 1;
+}
+
+.show-post-comments-info {
+  margin: 50px 30px 0 30px;
+}
+
+.show-post-comments-none {
+  font-size: 1em;
+  color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+  border-top: 1px solid rgba(0,0,0,0.2);
+}
+
+.show-post-avatar {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 20px;
+  border: 1px solid rgba(0,0,0,0.2);
+}
+
+.show-post-user {
+  display: flex;
+  align-items: center;
+}
+
+.show-post-user h3 {
+  color: #3b1360;
+}
+
+.show-post-user h3:hover {
+  color: #6923aa;
+  cursor: pointer;
+}
+
+.show-post-user p {
+  color: rgba(0,0,0,0.5);
+}
+
+.show-post-image {
+  width: 100%;
+}
+
+.show-post-text {
+  margin-top: 20px;
+}
+
+.show-post-title {
+  display: flex;
+  align-items: center;
+}
+
+.show-post-title div {
+  text-align: right;
+  flex: 1;
+}
+
+.show-post-title h1 {
+  padding-right: 10px;
+}
+
+.post-recommend-img {
+  width: 50px;
+}
+
+.comment-input {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 0;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 4px;
+  resize: none;
+  outline: none;
+  font-size: 0.9em;
+  padding: 5px;
+}
+
+.cannot-comment {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: rgba(0,0,0,0.5);
+}
+
+.cannot-comment-login {
+  color: #3b1360;
+  font-weight: bold;
+}
+
+.post-comment-icon {
+  position: relative;
+  top: 3px;
+  color: #3b1360;
+}
+
+.post-like-icon {
+  position: relative;
+  top: 1px;
+  margin-left: 20px;
+  color: #3b1360;
+}
+
+.post-like-icon:hover, .post-comment-icon:hover {
+  cursor: pointer;
+}
+
+.post-like-icon-activated {
+  position: relative;
+  top: 1px;
+  margin-left: 20px;
+  color: #6923aa;
+  cursor: pointer;
+}
+
+.post-comments-likes {
+  display: flex;
+  margin-top: 15px;
+}
+
+.post-comments-likes p {
+  font-size: 1em;
+}
+
+.show-post-comments-container button {
+  width: 40px;
+  color: white;
+  background-color: #3b1360;
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  margin-top: 0;
+  margin-left: 0;
+  height: 25px;
+  font-size: 0.9em;
+}
+
+.show-post-comments-container button:hover {
+  background-color: #6923aa;
+  cursor: pointer;
+}
+
+.show-post-comments {
+  border-top: 1px solid rgba(0,0,0,0.2);
+}
