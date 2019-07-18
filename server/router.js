@@ -19,11 +19,17 @@ router.route('/users/:id/followers')
 router.route('/users/:id/following')
   .get(controller.findFollowing);
 
+router.route('/posts/:id')
+  .get(controller.findOnePost);
+
 router.route('/posts/:id/likes')
   .get(controller.findPostLikes);
 
 router.route('/posts/:id/comments')
   .get(controller.findPostComments);
+
+router.route('/comments')
+  .post(controller.postComment);
 
 router.route('/register')
   .post(controller.register);

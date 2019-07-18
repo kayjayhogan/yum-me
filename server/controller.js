@@ -86,7 +86,23 @@ module.exports = {
       res.status(200).send(data.rows);
     })
     .catch((err) => {
-      res.status(400).send("Error finding user's posts': ", err);
+      res.status(400).send("Error finding user's posts: ", err);
+    });
+  },
+  // get one post 
+  findOnePost: (req, res) => {
+    let { id } = req.params;
+    db.query(`
+      SELECT *
+        FROM posts
+      WHERE
+        id = ${id}
+    ;`)
+    .then((data) => {
+      res.status(200).send(data.rows);
+    })
+    .catch((err) => {
+      res.status(400).send("Error finding post: ", err);
     })
   },
   // get likes of a post
@@ -152,6 +168,21 @@ module.exports = {
     .catch(err => {
       res.status(404).send("Error finding followed users: ", err);
     })
+  },
+
+// POSTING
+
+  postComment: (req, res) => {
+    const { author_id, post_id, content } = req.body;
+    const options = [author_id, post_id, content];
+    db.query(`
+      INSERT into comments 
+        (author_id, post_id, content)
+      VALUES
+        ($1, $2, $3)
+    `, options)
+    .then(() => res.status(200).send("Successfully posted comment."))
+    .catch(err => res.status(404).send("Error posting comment: ", err));
   },
 // AUTHENTICATION
 
