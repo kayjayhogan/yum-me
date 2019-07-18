@@ -1,0 +1,45 @@
+.single-comment {
+  padding-top: 20px;
+}
+
+.single-comment img {
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.1);
+  margin-right: 10px;
+  margin-left: 30px;
+}
+
+.single-comment img:hover {
+  cursor: pointer;
+}
+
+.comment-text {
+  font-size: 1em;
+  color: rgb(37, 37, 37);
+  margin-right: 30px;
+}
+
+.comment-date {
+  color: rgba(0,0,0,0.5);
+  font-size: 0.9em;
+  margin-top: 3px;
+}
+
+.comment-details {
+  display: flex;
+  align-items: start;
+}
+
+.comment-text span {
+  color: #3b1360;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.comment-text span:hover {
+  color: #6923aa;
+  cursor: pointer;
+}
