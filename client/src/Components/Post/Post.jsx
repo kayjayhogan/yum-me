@@ -112,7 +112,7 @@ class Post extends React.Component {
     const { comments, author } = this.state;
     const commentSection = comments.length > 0 ? 
       <div className="show-post-comments">
-        {/* {comments.map((comment, index) => <PostComment comment={comment} key={index} currentUser={username} currentAvatar={avatar}/>)} */}
+        {comments.map((comment, i) => <Comment comment={comment} key={i} />)}
       </div> : 
       <div className="show-post-comments-none">
         <p >No comments posted yet.</p>
