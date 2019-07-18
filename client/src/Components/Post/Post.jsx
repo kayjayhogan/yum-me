@@ -93,8 +93,8 @@ class Post extends React.Component {
     axios.get(`/posts/${id}`)
     .then(({ data }) => {
       this.setState({
-        post: data
-      })
+        post: data[0]
+      }, this.fetchComments());
     })
     .catch(err => console.log('Error updating post: ', err));
   }
