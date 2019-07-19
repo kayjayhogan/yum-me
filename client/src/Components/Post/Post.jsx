@@ -79,10 +79,11 @@ class Post extends React.Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
     const content = this.state.newComment;
     const post_id = this.state.post.id;
     const author_id = this.props.user.id;
+    document.getElementById("comment-form").reset();
     axios.post('/comments', { author_id, post_id, content })
     .then(() => this.getUpdatedPost())
     .catch(err => console.log('Error posting comment: ', err));    
@@ -136,8 +137,8 @@ class Post extends React.Component {
       <img className="post-recommend-img" src="https://res.cloudinary.com/kjhogan/image/upload/v1562452170/yumme_2_wphphq.png"></img>
     const likeIcon = this.state.like ? <FaThumbsUp className="post-like-icon-activated" /> : <FaThumbsUp className="post-like-icon" />;
     const commentBox = username ? 
-      <form onSubmit={this.handleSubmit}>
-        <textarea className="comment-input" id="comment-input" name="newComment" placeholder="Write a comment..." onChange={this.handleChange}/>
+      <form onSubmit={this.handleSubmit} id="comment-form" >
+        <textarea className="comment-input" name="newComment" placeholder="Write a comment..." onChange={this.handleChange}/>
         <button type="submit" ><FaTelegramPlane /></button>
       </form> :
       <div className="cannot-comment">
