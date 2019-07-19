@@ -37,7 +37,7 @@ class FeedPost extends React.Component {
     axios.get(`/posts/${this.props.post.id}/comments`)
     .then(({ data }) => {
       this.setState({
-        likes: data.length
+        comments: data.length
       });
     })
     .catch(err => console.log("Error fetching comments: ", err));
@@ -47,7 +47,7 @@ class FeedPost extends React.Component {
     axios.get(`/posts/${this.props.post.id}/likes`)
     .then(({ data }) => {
       this.setState({
-        comments: data.length
+        likes: data.length
       });
     })
     .catch(err => console.log("Error fetching likes: ", err));
