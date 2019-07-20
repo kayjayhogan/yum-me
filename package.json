@@ -4,7 +4,8 @@
   "description": "A food blog app where users can share their love of dining",
   "main": "server/index.js",
   "scripts": {
-    "start": "nodemon server/index.js",
+    "dev:server": "env-cmd nodemon server/index.js",
+    "start": "node server/index.js",
     "dev:static": "webpack -w -d"
   },
   "repository": {
@@ -21,7 +22,6 @@
     "express": "^4.17.1",
     "moment": "^2.24.0",
     "node": "^12.6.0",
-    "passport": "^0.4.0",
     "pg": "^7.11.0",
     "pg-hstore": "^2.3.3",
     "react": "^16.8.6",
