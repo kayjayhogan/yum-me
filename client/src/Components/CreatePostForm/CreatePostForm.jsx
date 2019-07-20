@@ -20,6 +20,7 @@ class CreatePostForm extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleYelp = this.handleYelp.bind(this);
+    this.handleImageUpload = this.handleImageUpload.bind(this);
   }
 
   handleChange(e) {
@@ -58,6 +59,13 @@ class CreatePostForm extends React.Component {
       restaurants: []
     });
     console.log(option);
+  }
+
+  handleImageUpload(e) {
+    e.preventDefault();
+    this.setState({
+      file: e.target.files[0]
+    });
   }
 
   render() {
@@ -101,8 +109,14 @@ class CreatePostForm extends React.Component {
                   {dropdown}
                 </div>
               </label>
-              {/* <input style={result} type="file" onChange={this.handleUploadImage} required/>
-              <textarea className="createTextArea" rows="100" cols="100" name="text" placeholder="What is your story..." onChange={this.handleChange} required></textarea> */}
+              <label>
+                Upload a picture of your experience:
+                <input className="create-post-image-input" type="file" onChange={this.handleImageUpload} required/>
+              </label>
+              <label>
+                Post content:
+                <textarea className="create-post-textarea" rows="100" cols="100" name="text" placeholder="Tell us all about it!" onChange={this.handleChange} required></textarea>
+              </label>
               {/* <div className="createRecommend">
                 <p>Recommend?</p>
                 <div className="recommendContainer">

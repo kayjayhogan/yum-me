@@ -3,7 +3,6 @@
 }
 
 .create-post-container {
-  height: 600px;
   padding-top: 100px;    
   background-color: white;
   border: 1px solid rgba(0,0,0,0.2);
@@ -91,6 +90,28 @@ h1 {
 
 .dropdown-restaurant:hover {
   background-color: rgb(240, 241, 242);
+}
+
+.create-post-textarea {
+  height: 280px;
+  width: 500px;
+  font-size: 0.9em;
+  border: none;
+  top: 238px;
+  border-radius: 4px;
+  background-color: rgb(240, 241, 242);
+  padding: 15px;
+  display: block;
+  margin: 10px auto;
+}
+
+.create-post-textarea::placeholder {
+  padding: 0;
+}
+
+.create-post-image-input {
+  display: block;
+  margin-top: 5px;
 }
 
 /* TOOLTIP */
