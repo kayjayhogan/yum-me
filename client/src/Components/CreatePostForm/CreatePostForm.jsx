@@ -21,6 +21,7 @@ class CreatePostForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleYelp = this.handleYelp.bind(this);
     this.handleImageUpload = this.handleImageUpload.bind(this);
+    this.handleRecommend = this.handleRecommend.bind(this);
   }
 
   handleChange(e) {
@@ -68,8 +69,20 @@ class CreatePostForm extends React.Component {
     });
   }
 
-  render() {
+  handleRecommend(e) {
+    if(e.target.value === 'recommendYes') {
+      this.setState({
+        recommended: true
+      });
+    } else if(e.target.value === 'recommendNo') {
+      this.setState({
+        recommended: false
+      });
+    }
+  }
 
+  render() {
+    console.log(this.state);
     const dropdown = this.state.restaurants.length ? 
       <div className="create-post-dropdown">
         <h3>Search Results</h3>
@@ -85,11 +98,11 @@ class CreatePostForm extends React.Component {
           <div className="create-post-container">
             <h1>Create New Post</h1>
             <form id="create-post-form">
-              <label>
+              <label className="create-post-label">
                 Choose a title for your post:
                 <input className="create-post-input" type="text" name="title" placeholder="Title" onChange={this.handleChange} required/>
               </label>
-              <label>
+              <label className="create-post-label">
                 <div className="tooltip">
                   Restaurant location:
                   <span className="question-icon"><FaQuestionCircle /></span>
@@ -102,36 +115,36 @@ class CreatePostForm extends React.Component {
                 </div>
                 <input className="create-post-input" type="text" name="location" placeholder="Location" onChange={this.handleChange} required/>
               </label>
-              <label>
+              <label className="create-post-label">
                 Restaurant name:
                 <div className="create-post-search">
                   <input className="create-post-input" type="text" placeholder="Restaurant" value={this.state.restaurant.name} onChange={this.handleYelp} required/>
                   {dropdown}
                 </div>
               </label>
-              <label>
+              <label className="create-post-label">
                 Upload a picture of your experience:
                 <input className="create-post-image-input" type="file" onChange={this.handleImageUpload} required/>
               </label>
-              <label id="create-post-textarea-container">
+              <label className="create-post-textarea-container">
                 Post content:
                 <textarea className="create-post-textarea" rows="100" cols="100" name="text" placeholder="Tell us all about it!" onChange={this.handleChange} required></textarea>
               </label>
-              {/* <div className="createRecommend">
+              <div className="create-post-recommend">
                 <p>Recommend?</p>
-                <div className="recommendContainer">
+                <div className="create-recommend-container">
                   <input id="recommendYes" type="radio" name="recommend" value="recommendYes" checked={this.state.recommended} onChange={this.handleRecommend}></input>
                   <label htmlFor="recommendYes">
-                    <img src="https://res.cloudinary.com/kjhogan/image/upload/v1536097829/happy_dbmo3c.png"></img>
+                    <img src="https://res.cloudinary.com/kjhogan/image/upload/v1562452169/yumme_4_ukpyej.png"></img>
                   </label>
                 </div>
-                <div className="recommendContainer">
+                <div className="create-recommend-container">
                   <input id="recommendNo" type="radio" name="recommend" value="recommendNo" checked={!this.state.recommended} onChange={this.handleRecommend}></input>
                   <label htmlFor="recommendNo">
-                    <img src="https://res.cloudinary.com/kjhogan/image/upload/v1536097829/sad_fcfqhu.png"></img>
+                    <img src="https://res.cloudinary.com/kjhogan/image/upload/v1562452170/yumme_2_wphphq.png"></img>
                   </label>
                 </div>
-              </div> */}
+              </div>
               <button className="create-post-submit" type="submit">submit</button> 
             </form>
           </div>
