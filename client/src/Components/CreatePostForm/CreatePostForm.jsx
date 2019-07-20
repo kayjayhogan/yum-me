@@ -34,7 +34,8 @@ class CreatePostForm extends React.Component {
     }, () => {
       axios.get('/yelp', { 
         params: { 
-          term: this.state.restaurant, location 
+          term: this.state.restaurant, 
+          location: location
         } 
       })
       .then(({ data }) => {
@@ -44,8 +45,7 @@ class CreatePostForm extends React.Component {
         });
         this.setState({
           restaurants: result
-        })
-
+        });
       })
       .catch(err => console.log('Error accessing Yelp API: ', err))
     })
@@ -56,6 +56,7 @@ class CreatePostForm extends React.Component {
       restaurant: option,
       restaurants: []
     });
+    console.log(option);
   }
 
   render() {
@@ -63,7 +64,7 @@ class CreatePostForm extends React.Component {
     const dropdown = this.state.restaurants.length ? 
       <div className="create-post-dropdown">
         <h5>Search Results</h5>
-        {this.props.restaurants.map((restaurant, i) => 
+        {this.state.restaurants.map((restaurant, i) => 
           <p className="dropdown-restaurant" key={i} onClick={() => this.handlePickRestaurant(restaurant)}>{restaurant.name}</p> 
         )}
       </div> : null;
@@ -78,7 +79,7 @@ class CreatePostForm extends React.Component {
               <input className="create-post-input" type="text" name="title" placeholder="Title" onChange={this.handleChange} required/>
               <input className="create-post-input" type="text" name="location" placeholder="Location" onChange={this.handleChange} required/>
               <div className="create-post-search">
-                <input className="create-post-input" type="text" placeholder="Restaurant" value={this.state.restaurant} onChange={this.handleYelp} required/>
+                <input className="create-post-input" type="text" placeholder="Restaurant" value={this.state.restaurant.name} onChange={this.handleYelp} required/>
                 {dropdown}
               </div>
               {/* <input style={result} type="file" onChange={this.handleUploadImage} required/>
