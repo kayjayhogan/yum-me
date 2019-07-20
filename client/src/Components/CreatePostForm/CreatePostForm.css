@@ -52,7 +52,30 @@ h1 {
   font-size: 0.8em;
   display: block;
 }
+
 .create-post-submit:hover {
   background-color: #6923aa;
   cursor: pointer;
+}
+
+.create-post-search {
+  position: relative;
+}
+
+.create-post-dropdown {
+  height: 200px;
+  width: 500px;
+  border: none;
+  background: rgb(240, 241, 242);
+  position: absolute;
+  box-shadow: 0 12px 24px rgba(0,0,0,.1);
+  cursor: pointer;
+}
+
+.create-post-dropdown h5 {
+  padding-left: 10px;
+}
+
+.dropdown-restaurant {
+  padding-left: 20px;
 }
