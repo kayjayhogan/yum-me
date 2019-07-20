@@ -1,4 +1,3 @@
-const passport = require('passport');
 const yelp = require('yelp-fusion');
 const db = require('../database/index.js');
 const bcrypt = require('bcryptjs');
@@ -168,6 +167,25 @@ module.exports = {
     .catch(err => {
       res.status(404).send("Error finding followed users: ", err);
     })
+  },
+  // get restaurant using Yelp API
+  getRestaurant: (req, res) => {    
+    const apiKey = `${process.env.KEY}`;
+    const searchRequest = {
+      term: req.query.term,
+      location: req.query.location,
+      categories: 'Food'
+    };
+    const client = yelp.client(apiKey);
+
+    client.search(searchRequest)
+    .then(response => {
+      const firstResult = response.jsonBody.businesses.slice(0,10);
+      const prettyJson = JSON.stringify(firstResult, null, 4);
+      res.status(200).send(JSON.parse(prettyJson))
+    }).catch(err => {
+      res.status(404).send('Error getting restaurants: ', err);
+    });
   },
 
 // POSTING
