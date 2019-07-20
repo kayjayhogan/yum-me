@@ -7,8 +7,7 @@
   background-color: white;
   border: 1px solid rgba(0,0,0,0.2);
   border-radius: 4px;
-  padding-top: 40px;
-  padding-bottom: 30px;
+  padding: 40px;
   width: 60vw;
   min-width: 600px;
   margin: 0 auto;
@@ -21,7 +20,7 @@
 .create-post-input {
   display: block;
   height: 30px;
-  width: 500px;
+  width: 400px;
   font-size: 0.9em;
   border: none;
   border-radius: 4px;
@@ -34,21 +33,21 @@
   padding: 0;
 }
 
-#create-post-form label {
+.create-post-container label {
   display: block;
   width: 500px;
-  margin: 5px auto 10px auto;
+  margin: 5px 0 10px 0;
   font-size: 0.9em;
   color: rgba(0,0,0,0.8);
 }
 
-h1 {
-  text-align: center;
+.create-post-container h1 {
+  text-align: left;
   margin-bottom: 20px;
 }
 
 .create-post-submit { 
-  margin: 20px auto 0 auto;
+  margin-top: 20px;
   width: 100px;
   height: 40px;
   border-radius: 20px;
@@ -92,9 +91,13 @@ h1 {
   background-color: rgb(240, 241, 242);
 }
 
+#create-post-textarea-container {
+  width: 100%;
+}
+
 .create-post-textarea {
   height: 280px;
-  width: 500px;
+  width: 100%;
   font-size: 0.9em;
   border: none;
   top: 238px;
@@ -103,6 +106,7 @@ h1 {
   padding: 15px;
   display: block;
   margin: 10px auto;
+  outline: none;
 }
 
 .create-post-textarea::placeholder {

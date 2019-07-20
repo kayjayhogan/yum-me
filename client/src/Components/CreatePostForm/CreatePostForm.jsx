@@ -113,7 +113,7 @@ class CreatePostForm extends React.Component {
                 Upload a picture of your experience:
                 <input className="create-post-image-input" type="file" onChange={this.handleImageUpload} required/>
               </label>
-              <label>
+              <label id="create-post-textarea-container">
                 Post content:
                 <textarea className="create-post-textarea" rows="100" cols="100" name="text" placeholder="Tell us all about it!" onChange={this.handleChange} required></textarea>
               </label>
