@@ -2,6 +2,7 @@ import React from 'react';
 import './CreatePostForm.css';
 import Navbar from '../Navbar/Navbar.jsx'
 import axios from 'axios';
+import { FaQuestionCircle, FaInfo } from 'react-icons/fa'; 
 
 class CreatePostForm extends React.Component {
   constructor(props) {
@@ -9,7 +10,7 @@ class CreatePostForm extends React.Component {
     this.state = {
       restaurants: [],
       title: "",
-      restaurant: "",
+      restaurant: {},
       text: "",
       author: "",
       location: "",
@@ -63,7 +64,7 @@ class CreatePostForm extends React.Component {
 
     const dropdown = this.state.restaurants.length ? 
       <div className="create-post-dropdown">
-        <h5>Search Results</h5>
+        <h3>Search Results</h3>
         {this.state.restaurants.map((restaurant, i) => 
           <p className="dropdown-restaurant" key={i} onClick={() => this.handlePickRestaurant(restaurant)}>{restaurant.name}</p> 
         )}
@@ -76,12 +77,30 @@ class CreatePostForm extends React.Component {
           <div className="create-post-container">
             <h1>Create New Post</h1>
             <form id="create-post-form">
-              <input className="create-post-input" type="text" name="title" placeholder="Title" onChange={this.handleChange} required/>
-              <input className="create-post-input" type="text" name="location" placeholder="Location" onChange={this.handleChange} required/>
-              <div className="create-post-search">
-                <input className="create-post-input" type="text" placeholder="Restaurant" value={this.state.restaurant.name} onChange={this.handleYelp} required/>
-                {dropdown}
-              </div>
+              <label>
+                Choose a title for your post:
+                <input className="create-post-input" type="text" name="title" placeholder="Title" onChange={this.handleChange} required/>
+              </label>
+              <label>
+                <div className="tooltip">
+                  Restaurant location:
+                  <span className="question-icon"><FaQuestionCircle /></span>
+                  <span className="tooltip-text">
+                    <span className="info-icon"><FaInfo /></span>
+                    Search for any restaurant available on Yelp! Enter the location
+                    of the restaurant (e.g., Los Angeles, CA), begin typing in the restaurant name, and Yelp will
+                    find all results that match. Pick the restaurant you want to write about!
+                  </span>
+                </div>
+                <input className="create-post-input" type="text" name="location" placeholder="Location" onChange={this.handleChange} required/>
+              </label>
+              <label>
+                Restaurant name:
+                <div className="create-post-search">
+                  <input className="create-post-input" type="text" placeholder="Restaurant" value={this.state.restaurant.name} onChange={this.handleYelp} required/>
+                  {dropdown}
+                </div>
+              </label>
               {/* <input style={result} type="file" onChange={this.handleUploadImage} required/>
               <textarea className="createTextArea" rows="100" cols="100" name="text" placeholder="What is your story..." onChange={this.handleChange} required></textarea> */}
               {/* <div className="createRecommend">
