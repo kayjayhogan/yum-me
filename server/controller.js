@@ -202,6 +202,19 @@ module.exports = {
     .then(() => res.status(200).send("Successfully posted comment."))
     .catch(err => res.status(404).send("Error posting comment: ", err));
   },
+
+  postRestaurant: (req, res) => {
+    const { rest_name, address_city, address_state, address_country, price, rating, rest_url } = req.body;
+    const options = [rest_name, address_city, address_state, address_country, price, rating, rest_url];
+    db.query(`
+    INSERT into restaurants 
+      (rest_name, address_city, address_state, address_country, price, rating, rest_url)
+    VALUES
+      ($1, $2, $3, $4, $5, $6, $7)
+    `, options)
+    .then(() => res.status(200).send("Successfully posted restaurant."))
+    .catch(err => res.status(404).send("Error posting restaurant: ", err));
+  },
 // AUTHENTICATION
 
   login: (req, res) => {

@@ -14,6 +14,7 @@ router
   .get('/yelp', controller.getRestaurant)
   .post('/comments', controller.postComment)
   .post('/register', controller.register)
-  .post('/login', controller.login);
+  .post('/login', controller.login)
+  .post('/restaurants', controller.postRestaurant);
 
 module.exports = router;
