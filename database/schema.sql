@@ -16,15 +16,26 @@ CREATE TABLE IF NOT EXISTS followers (
 	user_id             INTEGER REFERENCES users(id)
 );
 
+CREATE TABLE IF NOT EXISTS restaurants (
+	id								SERIAL PRIMARY KEY,
+	rest_name 				TEXT NOT NULL,
+	address_city			TEXT NOT NULL,
+	address_state			TEXT,
+	address_country		TEXT NOT NULL,
+	price							TEXT NOT NULL,
+	rating						INTEGER NOT NULL,
+	rest_url 					TEXT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS posts (
-	id          SERIAL PRIMARY KEY,
-	title       TEXT NOT NULL,
-	author_id   INTEGER REFERENCES users(id),
-	restaurant  TEXT NOT NULL,
-	descript    TEXT NOT NULL,
-	recommended BOOLEAN NOT NULL,
-	created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-	img_url     TEXT NOT NULL
+	id          	SERIAL PRIMARY KEY,
+	title       	TEXT NOT NULL,
+	author_id   	INTEGER REFERENCES users(id),
+	restaurant_id INTEGER REFERENCES restaurants(id),
+	descript    	TEXT NOT NULL,
+	recommended 	BOOLEAN NOT NULL,
+	created_at  	TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+	img_url     	TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS comments (
@@ -40,3 +51,4 @@ CREATE TABLE IF NOT EXISTS likes (
 	post_id    INTEGER REFERENCES posts(id),
 	user_id    INTEGER REFERENCES users(id)
 );
+
