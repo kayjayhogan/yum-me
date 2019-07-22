@@ -15,7 +15,7 @@ class Post extends React.Component {
       author: {},
       comments: [], 
       newComment: '', 
-      like: false,
+      likes: [],
       showModal: false
     }
     this.fetchComments = this.fetchComments.bind(this);
@@ -25,11 +25,13 @@ class Post extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getUpdatedPost = this.getUpdatedPost.bind(this);
-    // this.handleLikePost = this.handleLikePost.bind(this);
+    this.handleLikePost = this.handleLikePost.bind(this);
+    this.fetchLikes = this.fetchLikes.bind(this);
   }
 
   componentDidMount() {
     this.fetchComments();
+    this.fetchLikes();
     this.fetchAuthor();
   }
 
@@ -58,6 +60,16 @@ class Post extends React.Component {
       });
     })
     .catch(err => console.log('Error finding post author details: ', err));
+  }
+
+  fetchLikes() {
+    const post_id = this.state.post.id;
+    axios.get(`/posts/${post_id}/likes`)
+    .then(({ data }) => {
+      this.setState({
+        likes: data
+      });
+    })
   }
 
   handleShowModal() {
@@ -95,47 +107,62 @@ class Post extends React.Component {
     .then(({ data }) => {
       this.setState({
         post: data[0]
-      }, this.fetchComments());
+      }, (() => {
+        this.fetchComments();
+        this.fetchLikes();
+      })());
     })
     .catch(err => console.log('Error updating post: ', err));
   }
   
-  // handleLikePost () {
-  //   const { id, username } = this.props.location;
-  //   if(username.length > 0) {
-  //     this.setState({like: !this.state.like}, () => {
-  //       if(this.state.like) {
-  //         axios.post('/post/like', {_id: id})
-  //         .then(() => this.fetchOnePost())
-  //         .catch(() => console.error('Error with liking post'));
-  //       } else {
-  //         axios.post('/post/unlike', {_id: id})
-  //         .then(() => this.fetchOnePost())
-  //         .catch(() => console.error('Error with unliking post'));
-  //       }
-  //     })
-  //   }
-  // }
+  handleLikePost () {
+    const { id } = this.props.user;
+    let currentlyLikesPost = this.state.likes.some(obj => {
+      return obj["user_id"] === id;
+    });
+    if(!currentlyLikesPost) {
+      axios.post('/posts/like', {
+        post_id: this.state.post.id,
+        user_id: id
+      })
+      .then(() => this.getUpdatedPost())
+      .catch(() => console.error('Error with liking post'));
+    } else {
+      axios.post('/posts/unlike', {
+        post_id: this.state.post.id,
+        user_id: id
+      })
+      .then(() => this.getUpdatedPost())
+      .catch(() => console.error('Error with unliking post'));
+    }
+  }
 
   render () {
     const modal = this.state.showModal ? 
       (<AuthModal handleHide={this.handleHideModal} changeView={(option) => this.props.changeView(option)} changeUser={(user) => this.props.changeUser(user)}></AuthModal>) : null;
-
-    const { username, avatar } = this.props.user;
+    // variables to use below
+    const { username, avatar, id } = this.props.user;
     const { created_at, img_url, recommended, restaurant, descript, title } = this.state.post;
-    const { comments, author } = this.state;
+    const { comments, author, likes } = this.state;
+    const postAuthor = author ? author.username : null;
+    // show comments if there are any, otherwise display a message
     const commentSection = comments.length > 0 ? 
-      <div className="show-post-comments">
+    <div className="show-post-comments">
         {comments.map((comment, i) => <Comment comment={comment} key={i} />)}
       </div> : 
       <div className="show-post-comments-none">
         <p >No comments posted yet.</p>
       </div>
-    const postAuthor = author ? author.username : null;
+    // determines whether to use happy dumpling or sad dumpling
     const recommendImage = recommended ? 
-      <img className="post-recommend-img" src="https://res.cloudinary.com/kjhogan/image/upload/v1562452169/yumme_4_ukpyej.png"></img> :
-      <img className="post-recommend-img" src="https://res.cloudinary.com/kjhogan/image/upload/v1562452170/yumme_2_wphphq.png"></img>
-    const likeIcon = this.state.like ? <FaThumbsUp className="post-like-icon-activated" /> : <FaThumbsUp className="post-like-icon" />;
+    <img className="post-recommend-img" src="https://res.cloudinary.com/kjhogan/image/upload/v1562452169/yumme_4_ukpyej.png"></img> :
+    <img className="post-recommend-img" src="https://res.cloudinary.com/kjhogan/image/upload/v1562452170/yumme_2_wphphq.png"></img>
+    // determines whether to indicate post has been liked by current user
+    let currentlyLikesPost = this.state.likes.some(obj => {
+      return obj["user_id"] === id;
+    });
+    const likeIcon = currentlyLikesPost ? <FaThumbsUp className="post-like-icon-activated" /> : <FaThumbsUp className="post-like-icon" />;
+    // show comment box only if user is logged in
     const commentBox = username ? 
       <form onSubmit={this.handleSubmit} id="comment-form" >
         <textarea className="comment-input" name="newComment" placeholder="Write a comment..." onChange={this.handleChange}/>
@@ -175,7 +202,7 @@ class Post extends React.Component {
                 {/* <p>(Address here?)</p> */}
                 <div className="post-comments-likes">
                   <p><span><FaCommentAlt className="post-comment-icon"/></span> {comments ? comments.length : ''}</p>
-                  {/* <p><span onClick={this.handleLikePost}>{likeIcon}</span> {likes}</p> */}
+                  <p><span onClick={this.handleLikePost}>{likeIcon}</span> {likes.length}</p>
                 </div>
                 {commentBox}
               </div>
