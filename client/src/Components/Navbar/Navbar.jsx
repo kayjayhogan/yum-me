@@ -65,7 +65,7 @@ class Navbar extends React.Component {
         </div>
         <div>
           <li>
-            <a href="#" className="nav-links">create post</a>
+            <a onClick={(option) => this.props.changeView('create')} className="nav-links">create post</a>
           </li>     
         </div>
         <div>
