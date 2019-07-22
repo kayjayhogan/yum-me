@@ -207,14 +207,29 @@ module.exports = {
     const { rest_name, address_city, address_state, address_country, price, rating, rest_url } = req.body;
     const options = [rest_name, address_city, address_state, address_country, price, rating, rest_url];
     db.query(`
-    INSERT into restaurants 
-      (rest_name, address_city, address_state, address_country, price, rating, rest_url)
-    VALUES
-      ($1, $2, $3, $4, $5, $6, $7)
+      INSERT into restaurants 
+        (rest_name, address_city, address_state, address_country, price, rating, rest_url)
+      VALUES
+        ($1, $2, $3, $4, $5, $6, $7)
+      RETURNING id
     `, options)
-    .then(() => res.status(200).send("Successfully posted restaurant."))
+    .then((data) => res.status(200).send(data.rows[0]))
     .catch(err => res.status(404).send("Error posting restaurant: ", err));
   },
+
+  createPost: (req, res) => {
+    const { title, author_id, restaurant_id, descript, recommended, img_url } = req.body;
+    const options = [title, author_id, restaurant_id, descript, recommended, img_url];
+    db.query(`
+      INSERT into posts 
+        (title, author_id, restaurant_id, descript, recommended, img_url)
+      VALUES
+        ($1, $2, $3, $4, $5, $6)
+    `, options)
+    .then(() => res.status(200).send("Successfully created post"))
+    .catch(err => res.status(404).send("Error creating post: ", err));
+  },
+
 // AUTHENTICATION
 
   login: (req, res) => {
