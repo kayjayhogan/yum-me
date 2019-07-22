@@ -10,19 +10,23 @@ class PostCard extends React.Component {
     this.state = {
       user: {},
       likes: 0,
-      comments: 0
+      comments: 0,
+      restaurant: ''
     };
     this.fetchUserInfo = this.fetchUserInfo.bind(this);
     this.fetchLikes = this.fetchLikes.bind(this);
     this.fetchComments = this.fetchComments.bind(this);
+    this.fetchRestaurant = this.fetchRestaurant.bind(this);
   }
 
   componentDidMount() {
     const user_id = this.props.post['author_id'];
     const post_id = this.props.post.id;
+    const rest_id = this.props.post['restaurant_id'];
     this.fetchUserInfo(user_id);
     this.fetchLikes(post_id);
     this.fetchComments(post_id);
+    this.fetchRestaurant(rest_id);
   }
 
   fetchUserInfo(user_id) {
@@ -61,10 +65,20 @@ class PostCard extends React.Component {
     })
   }
 
+  fetchRestaurant(rest_id) {
+    axios.get(`/restaurants/${rest_id}`)
+    .then(({ data }) => {
+      this.setState({
+        restaurant: data['rest_name']
+      });
+    })
+    .catch(err => console.log('Could not fetch restaurant info: ', err));
+  }
+
   render() {
     const post = this.props.post;
     const { username, avatar } = this.state.user;
-    const { comments, likes } = this.state;
+    const { comments, likes, restaurant } = this.state;
 
     // handling date display
     let todaysDate = new Date();
@@ -91,7 +105,7 @@ class PostCard extends React.Component {
           <p>{post.descript.slice(0,100)}...</p>
         </div>
         <div className="post-card-details">
-          <p><strong>Restaurant:</strong> {post.restaurant}</p>
+          <p><strong>Restaurant:</strong> {restaurant}</p>
           <div>
             <div className="post-card-details-split">
               <span><FaThumbsUp /> {likes}</span>
