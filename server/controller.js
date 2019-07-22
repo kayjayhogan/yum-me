@@ -166,7 +166,7 @@ module.exports = {
     })
     .catch(err => {
       res.status(404).send("Error finding followed users: ", err);
-    })
+    });
   },
   // get restaurant using Yelp API
   getRestaurant: (req, res) => {    
@@ -185,6 +185,22 @@ module.exports = {
       res.status(200).send(JSON.parse(prettyJson))
     }).catch(err => {
       res.status(404).send('Error getting restaurants: ', err);
+    });
+  },
+  // get one restaurant from the database
+  fetchOneRestaurant: (req, res) => {
+    const { id } = req.params;
+    db.query(`
+      SELECT *
+        FROM restaurants
+      WHERE
+        id = ${id}
+    ;`)
+    .then(data => {
+      res.status(200).send(data.rows[0]);
+    })
+    .catch(err => {
+      res.status(404).send("Error finding followed users: ", err);
     });
   },
 
