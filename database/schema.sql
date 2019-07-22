@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS restaurants (
 	address_state			TEXT,
 	address_country		TEXT NOT NULL,
 	price							TEXT NOT NULL,
-	rating						INTEGER NOT NULL,
+	rating						DECIMAL NOT NULL,
 	rest_url 					TEXT NOT NULL
 );
 
