@@ -11,10 +11,10 @@ class CreatePostForm extends React.Component {
       restaurants: [],
       title: "",
       restaurant: {},
-      text: "",
-      author: "",
+      descript: "",
+      author: this.props.user,
       location: "",
-      image: null,
+      image: "",
       file: null,
       recommended: true, 
     }
@@ -22,6 +22,7 @@ class CreatePostForm extends React.Component {
     this.handleYelp = this.handleYelp.bind(this);
     this.handleImageUpload = this.handleImageUpload.bind(this);
     this.handleRecommend = this.handleRecommend.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
@@ -59,7 +60,6 @@ class CreatePostForm extends React.Component {
       restaurant: option,
       restaurants: []
     });
-    console.log(option);
   }
 
   handleImageUpload(e) {
@@ -81,8 +81,57 @@ class CreatePostForm extends React.Component {
     }
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('create-post-form').reset();
+    // first handle posting restaurant
+    const { restaurant } = this.state;
+    let options = {
+      rest_name: restaurant.name,
+      address_city: restaurant.location.city,
+      address_state: restaurant.location.state,
+      address_country: restaurant.location.country,
+      rest_url: restaurant.url,
+      price: restaurant.price,
+      rating: restaurant.rating
+    }
+    axios.post('/restaurants', options)
+    // then handle posting post
+    .then(async ({ data }) => {
+      const { file } = this.state;
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', `${process.env.PASSWORD}`);
+      const response = await axios.post(
+        `https://api.cloudinary.com/v1_1/${process.env.NAME}/image/upload`,
+        formData
+      );
+      let postOptions = { 
+        title: this.state.title, 
+        author_id: this.state.author.id,
+        restaurant_id: data.id,
+        descript: this.state.descript,
+        recommended: this.state.recommended, 
+        img_url: response.data.url
+      };
+      return axios.post('/posts', postOptions)
+    })
+    .then(() => {
+      this.setState({
+        restaurants: [],
+        title: "",
+        restaurant: {},
+        descript: "",
+        location: "",
+        image: "",
+        file: null,
+        recommended: true, 
+      }, console.log("Successfully posted restaurant."))
+    })
+    .catch(err => console.log("Error posting restaurant: ", err));
+  }
+
   render() {
-    console.log(this.state);
     const dropdown = this.state.restaurants.length ? 
       <div className="create-post-dropdown">
         <h3>Search Results</h3>
@@ -97,7 +146,7 @@ class CreatePostForm extends React.Component {
         <div className="create-post">          
           <div className="create-post-container">
             <h1>Create New Post</h1>
-            <form id="create-post-form">
+            <form id="create-post-form" onSubmit={this.handleSubmit}>
               <label className="create-post-label">
                 Choose a title for your post:
                 <input className="create-post-input" type="text" name="title" placeholder="Title" onChange={this.handleChange} required/>
@@ -128,7 +177,7 @@ class CreatePostForm extends React.Component {
               </label>
               <label className="create-post-textarea-container">
                 Post content:
-                <textarea className="create-post-textarea" rows="100" cols="100" name="text" placeholder="Tell us all about it!" onChange={this.handleChange} required></textarea>
+                <textarea className="create-post-textarea" rows="100" cols="100" name="descript" placeholder="Tell us all about it!" onChange={this.handleChange} required></textarea>
               </label>
               <div className="create-post-recommend">
                 <p>Recommend?</p>
