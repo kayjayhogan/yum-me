@@ -246,6 +246,29 @@ module.exports = {
     .catch(err => res.status(404).send("Error creating post: ", err));
   },
 
+  likePost: (req, res) => {
+    const { post_id, user_id } = req.body;
+    db.query(`
+      INSERT into likes 
+        (post_id, user_id)
+      VALUES
+        (${post_id}, ${user_id})
+    `)
+    .then(() => res.status(200).send("Successfully liked post"))
+    .catch(err => res.status(404).send("Error liking post: ", err));
+  },
+
+  unlikePost: (req, res) => {
+    const { post_id, user_id } = req.body;
+    db.query(`
+      DELETE from likes 
+      WHERE
+        post_id = ${post_id} AND user_id = ${user_id}
+    `)
+    .then(() => res.status(200).send("Successfully unliked post"))
+    .catch(err => res.status(404).send("Error unliking post: ", err));
+  },
+
 // AUTHENTICATION
 
   login: (req, res) => {

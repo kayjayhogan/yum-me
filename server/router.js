@@ -17,6 +17,8 @@ router
   .post('/register', controller.register)
   .post('/login', controller.login)
   .post('/restaurants', controller.postRestaurant)
-  .post('/posts', controller.createPost);
+  .post('/posts', controller.createPost)
+  .post('/posts/like', controller.likePost)
+  .post('/posts/unlike', controller.unlikePost);
 
 module.exports = router;
