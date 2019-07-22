@@ -16,6 +16,7 @@ class Post extends React.Component {
       comments: [], 
       newComment: '', 
       likes: [],
+      restaurant: {},
       showModal: false
     }
     this.fetchComments = this.fetchComments.bind(this);
@@ -27,12 +28,14 @@ class Post extends React.Component {
     this.getUpdatedPost = this.getUpdatedPost.bind(this);
     this.handleLikePost = this.handleLikePost.bind(this);
     this.fetchLikes = this.fetchLikes.bind(this);
+    this.fetchRestaurantInfo = this.fetchRestaurantInfo.bind(this);
   }
 
   componentDidMount() {
     this.fetchComments();
     this.fetchLikes();
     this.fetchAuthor();
+    this.fetchRestaurantInfo();
   }
 
   fetchComments() {
@@ -137,13 +140,25 @@ class Post extends React.Component {
     }
   }
 
+  fetchRestaurantInfo() {
+    const id = this.state.post['restaurant_id'];
+    axios.get(`/restaurants/${id}`)
+    .then(({ data }) => {
+      this.setState({
+        restaurant: data
+      });
+    })
+  }
+
   render () {
     const modal = this.state.showModal ? 
       (<AuthModal handleHide={this.handleHideModal} changeView={(option) => this.props.changeView(option)} changeUser={(user) => this.props.changeUser(user)}></AuthModal>) : null;
     // variables to use below
     const { username, avatar, id } = this.props.user;
-    const { created_at, img_url, recommended, restaurant, descript, title } = this.state.post;
-    const { comments, author, likes } = this.state;
+    const { created_at, img_url, recommended, descript, title } = this.state.post;
+    const { comments, author, likes, restaurant } = this.state;
+    const { rest_name, address_city, address_state, address_country, price, rating, rest_url } = restaurant;
+    let displayCountry = address_state ? address_state + ", " : "";
     const postAuthor = author ? author.username : null;
     // show comments if there are any, otherwise display a message
     const commentSection = comments.length > 0 ? 
@@ -198,8 +213,10 @@ class Post extends React.Component {
             </div>
             <div className="show-post-comments-container">
               <div className="show-post-comments-info">
-                <p className="show-post-restaurant"><strong><span>Restaurant:</span></strong> {restaurant}</p>
-                {/* <p>(Address here?)</p> */}
+                <p className="show-post-restaurant"><strong><span>Restaurant:</span></strong> {rest_name}</p>
+                <p>{address_city}, {displayCountry}{address_country}</p>
+                <p>{price} {rating}</p>
+                <a href={rest_url}>Yelp page</a>
                 <div className="post-comments-likes">
                   <p><span><FaCommentAlt className="post-comment-icon"/></span> {comments ? comments.length : ''}</p>
                   <p><span onClick={this.handleLikePost}>{likeIcon}</span> {likes.length}</p>
