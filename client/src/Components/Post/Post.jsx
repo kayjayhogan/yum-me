@@ -3,9 +3,11 @@ import axios from 'axios';
 import NavBar from '../Navbar/Navbar';
 import AuthModal from '../AuthModal/AuthModal';
 import Comment from './Comment/Comment.jsx'
+import Stars from './Stars.jsx'
 import './Post.css';
 import moment from 'moment';
 import { FaCommentAlt, FaThumbsUp, FaTelegramPlane } from 'react-icons/fa';
+import { MdLocationOn } from 'react-icons/md';
 
 class Post extends React.Component {
   constructor(props) {
@@ -214,9 +216,13 @@ class Post extends React.Component {
             <div className="show-post-comments-container">
               <div className="show-post-comments-info">
                 <p className="show-post-restaurant"><strong><span>Restaurant:</span></strong> {rest_name}</p>
-                <p>{address_city}, {displayCountry}{address_country}</p>
-                <p>{price} {rating}</p>
-                <a href={rest_url}>Yelp page</a>
+                <p className="show-post-details"><MdLocationOn />{address_city}, {displayCountry}{address_country}</p>
+                <div>
+                  <Stars rating={rating}/>
+                </div>
+                <p className="show-post-details">{price}</p>
+                <p className="show-post-details"></p>
+                <a className="show-post-yelp-url" href={rest_url}>Yelp page</a>
                 <div className="post-comments-likes">
                   <p><span><FaCommentAlt className="post-comment-icon"/></span> {comments ? comments.length : ''}</p>
                   <p><span onClick={this.handleLikePost}>{likeIcon}</span> {likes.length}</p>

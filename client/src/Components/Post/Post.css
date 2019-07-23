@@ -30,13 +30,27 @@
 }
 
 .show-post-restaurant {
-  font-size: 1.2em;
+  font-size: 1.1em;
   margin-top: 20px;
   cursor: default;
 }
 
 .show-post-restaurant span {
   color: #3b1360;
+}
+
+.show-post-details {
+  color: rgba(0,0,0,0.5);
+  font-size: 0.9em;
+}
+
+.show-post-yelp-url {
+  color: #3b1360;
+}
+
+.show-post-yelp-url:hover {
+  cursor: pointer;
+  color: #6923aa;
 }
 
 .show-post-comments-container {
