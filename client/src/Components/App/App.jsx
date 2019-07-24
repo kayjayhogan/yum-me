@@ -3,6 +3,7 @@ import Landing from '../Landing/Landing.jsx';
 import Browse from '../Browse/Browse.jsx';
 import Feed from '../Feed/Feed.jsx';
 import Post from '../Post/Post.jsx';
+import User from '../User/User.jsx';
 import CreatePostForm from '../CreatePostForm/CreatePostForm.jsx';
 import './App.css';
 
@@ -10,13 +11,15 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      view: 'create',
+      view: 'landing',
       currentPost: {},
+      userPage: {},
       user: {}
     }
     this.changeView = this.changeView.bind(this);
     this.changeUser = this.changeUser.bind(this);
     this.renderPost = this.renderPost.bind(this);
+    this.renderUserPage = this.renderUserPage.bind(this);
   }
 
   changeView(option) {
@@ -34,7 +37,13 @@ class App extends React.Component {
   renderPost(post) {
     this.setState({
       currentPost: post
-    }, this.changeView('post'))
+    }, this.changeView('post'));
+  }
+
+  renderUserPage(user) {
+    this.setState({
+      userPage: user
+    }, this.changeView('user'));
   }
 
   renderView() {
@@ -43,15 +52,15 @@ class App extends React.Component {
     if (view === 'landing') {
       return <Landing changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)} />
     } else if (view === 'browse') {
-      return <Browse user={this.state.user} changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)} renderPost={(post) => this.renderPost(post)}/> 
+      return <Browse user={this.state.user} changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)} renderPost={(post) => this.renderPost(post)} renderUserPage={(user) => this.renderUserPage(user)}/> 
     } else if (view === 'create') {
       return <CreatePostForm user={this.state.user} changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)} />
     } else if (view === 'user') {
-      // user component
+      return <User user={this.state.user} changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)} renderPost={(post) => this.renderPost(post)}/> 
     } else if (view === 'feed') {
-      return <Feed user={this.state.user} changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)} renderPost={(post) => this.renderPost(post)}/>
+      return <Feed user={this.state.user} changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)} renderPost={(post) => this.renderPost(post)} renderUserPage={(user) => this.renderUserPage(user)}/>
     } else if (view === 'post') {
-      return <Post post={this.state.currentPost} user={this.state.user} changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)}/>
+      return <Post post={this.state.currentPost} user={this.state.user} changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)} renderUserPage={(user) => this.renderUserPage(user)}/> 
     } 
   }
 
