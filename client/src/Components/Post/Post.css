@@ -1,3 +1,7 @@
+svg {
+  vertical-align: middle;
+}
+
 .show-post-container {
   padding-top: 70px;
   color: rgb(37, 37, 37);
@@ -41,11 +45,23 @@
 
 .show-post-details {
   color: rgba(0,0,0,0.5);
+  font-size: 1em;
+  cursor: default;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.dolla-dolla-billz {
+  margin-left: 20px;
   font-size: 0.9em;
+  cursor: default;
 }
 
 .show-post-yelp-url {
-  color: #3b1360;
+  color: rgba(0,0,0,0.5);
+  margin-left: 20px;
 }
 
 .show-post-yelp-url:hover {
@@ -148,15 +164,16 @@
   cursor: pointer;
 }
 
+.cannot-comment-login:hover {
+  color: #6923aa;
+}
+
 .post-comment-icon {
-  position: relative;
-  top: 3px;
   color: #3b1360;
 }
 
 .post-like-icon {
-  position: relative;
-  top: 1px;
+  vertical-align: top;
   margin-left: 20px;
   color: #3b1360;
 }

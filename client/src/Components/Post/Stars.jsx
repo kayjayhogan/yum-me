@@ -14,7 +14,7 @@ const Stars = (props) => {
   else if(rating === "4") starDisplay = <span><IoMdStar /><IoMdStar /><IoMdStar /><IoMdStar /></span>;
   else if(rating === "4.5") starDisplay = <span><IoMdStar /><IoMdStar /><IoMdStar /><IoMdStar /><IoMdStarHalf /></span>;
   else if(rating === "5") starDisplay = <span><IoMdStar /><IoMdStar /><IoMdStar /><IoMdStar /><IoMdStar /></span>;
-  return(<p className="show-post-details">
+  return(<p className="show-post-details inline-block">
     {starDisplay}
   </p>);
 }
