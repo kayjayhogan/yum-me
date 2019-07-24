@@ -1,4 +1,4 @@
-svg {
+.show-post-container svg {
   vertical-align: middle;
 }
 
@@ -173,7 +173,7 @@ svg {
 }
 
 .post-like-icon {
-  vertical-align: top;
+  vertical-align: top !important;
   margin-left: 20px;
   color: #3b1360;
 }
