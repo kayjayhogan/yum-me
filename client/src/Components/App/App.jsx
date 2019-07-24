@@ -58,7 +58,7 @@ class App extends React.Component {
     } else if (view === 'user') {
       return <User user={this.state.user} changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)} renderPost={(post) => this.renderPost(post)}/> 
     } else if (view === 'feed') {
-      return <Feed user={this.state.user} changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)} renderPost={(post) => this.renderPost(post)} renderUserPage={(user) => this.renderUserPage(user)}/>
+      return <Feed user={this.state.user} changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)} renderPost={(post) => this.renderPost(post)} userPage={this.state.userPage}/>
     } else if (view === 'post') {
       return <Post post={this.state.currentPost} user={this.state.user} changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)} renderUserPage={(user) => this.renderUserPage(user)}/> 
     } 
