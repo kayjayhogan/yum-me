@@ -96,8 +96,7 @@ class PostCard extends React.Component {
       <div className="post-card">
         <div className="post-card-user">
           <img className="post-card-avatar" src={avatar}></img>
-          {/* INSERT USER PROFILE LINK BELOW */}
-          <a href="#">{username}</a>
+          <a>{username}</a>
         </div>
         <img className="post-card-img" src={post["img_url"]}></img>
         <div className="post-card-description">

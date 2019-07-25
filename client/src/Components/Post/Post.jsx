@@ -164,7 +164,7 @@ class Post extends React.Component {
     // show comments if there are any, otherwise display a message
     const commentSection = comments.length > 0 ? 
     <div className="show-post-comments">
-        {comments.map((comment, i) => <Comment comment={comment} key={i} />)}
+        {comments.map((comment, i) => <Comment comment={comment} key={i} renderUserPage={(user) => this.props.renderUserPage(user)}/>)}
       </div> : 
       <div className="show-post-comments-none">
         <p >No comments posted yet.</p>
@@ -205,7 +205,7 @@ class Post extends React.Component {
                 <div className="show-post-user">
                   <img className="show-post-avatar" src={author ? author.avatar : ''} />
                   <div>
-                    <h3>{postAuthor}</h3>
+                    <h3 onClick={() => this.props.renderUserPage(author)}>{postAuthor}</h3>
                     <p>{moment(created_at).fromNow()}</p>
                   </div>
                 </div>
