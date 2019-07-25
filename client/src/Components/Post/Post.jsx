@@ -67,8 +67,8 @@ class Post extends React.Component {
   }
 
   fetchLikes() {
-    const post_id = this.state.post.id;
-    axios.get(`/posts/${post_id}/likes`)
+    const { id } = this.state.post;
+    axios.get(`/posts/${id}/likes`)
     .then(({ data }) => {
       this.setState({
         likes: data
