@@ -16,10 +16,6 @@
   text-decoration: none;
 }
 
-.post-card-user a:hover {
-  color: #602993; 
-}
-
 .post-card-avatar {
   width: 40px;
   height: 40px;
