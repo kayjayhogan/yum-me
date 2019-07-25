@@ -11,13 +11,20 @@ class User extends React.Component {
     this.state = {
       author: this.props.userPage,
       posts: [],
-      currentUser: this.props.user
+      currentUser: this.props.user,
+      followers: 0,
+      following: 0,
+      followStatus: false
     };
     this.fetchUserPosts = this.fetchUserPosts.bind(this);
+    this.fetchFollowers = this.fetchFollowers.bind(this);
+    this.fetchFollowing = this.fetchFollowing.bind(this);
   }
 
   componentDidMount() {
     this.fetchUserPosts();
+    this.fetchFollowers();
+    this.fetchFollowing();
   }
 
   fetchUserPosts() {
@@ -31,8 +38,40 @@ class User extends React.Component {
     .catch(err => console.log("Error fetching user's posts: ", err));
   }
 
+  fetchFollowers() {
+    const { id } = this.state.author;
+    axios.get(`/users/${id}/followers`)
+    .then(({ data }) => {
+      for(let obj of data) {
+        if(obj['user_id'] === this.state.currentUser.id) {
+          this.setState({
+            followStatus: true,
+            followers: data.length
+          })
+        } else {
+          this.setState({
+            followers: data.length
+          })
+        }
+      }      
+    })
+    .catch(err => console.log("Error fetching user's posts: ", err));
+  }
+
+  fetchFollowing() {
+    const { id } = this.state.author;
+    axios.get(`/users/${id}/following`)
+    .then(({ data }) => {
+      this.setState({
+        following: data.length
+      })
+    })
+    .catch(err => console.log("Error fetching user's posts: ", err));
+  }
+
   render() {
-    const { posts, author, currentUser } = this.state;
+    console.log(this.state);
+    const { posts, author, currentUser, followStatus, followers, following } = this.state;
     const userPostSection = this.state.posts.length ? 
       <div className="two-col-grid">
         {posts.map((post, i) => <div key={i} className="grid-item hvr-grow"><UserPost post={post} author={author}/></div>)}
@@ -69,8 +108,8 @@ class User extends React.Component {
             </div>
             <div className="user-user-info-details">
               <p><span>{posts.length}</span> posts</p>
-              {/* <p><span>{followers}</span> followers</p>
-              <p><span>{followingNum}</span> following</p> */}
+              <p><span>{followers}</span> followers</p>
+              <p><span>{following}</span> following</p>
             </div>
           </div>
         </div>
