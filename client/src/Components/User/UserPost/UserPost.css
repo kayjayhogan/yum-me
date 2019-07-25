@@ -1,0 +1,97 @@
+.feed-post {
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 4px;
+  margin:0 15px 15px 15px;
+  background-color: white;
+}
+
+.post-avatar {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  margin-left: 10px;
+  margin-right: 20px;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.post-image {
+  width: 100%;
+}
+
+.feed-post-user-stripe {
+  background-color: white;
+  border-radius: 4px 4px 0 0;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.feed-post-user-stripe h3 {
+  color: #3b1360;
+}
+
+.feed-post-user-stripe h3:hover {
+  color: #6923aa;
+  cursor: pointer;
+}
+
+.feed-post-user-stripe p {
+  font-size: 0.9em;
+  color: rgba(37, 37, 37);
+}
+
+.post-well {
+  padding: 20px;
+}
+
+.post-well h3 {
+  color: #3b1360;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.post-well h3:hover {
+  color: #6923aa;
+}
+
+.post-well p {
+  color: rgb(37, 37, 37);
+  font-size: 1em;
+}
+
+.post-detail div {
+  display: inline-block;
+  font-size: 0.9em;
+  margin-top: 30px;
+  margin-right: 15px;
+}
+
+.post-detail div span {
+  color: #3b1360;
+}
+
+.post-detail div span:hover {
+  cursor: pointer;
+}
+
+.post-card-comment-icon {
+  top: 2px;
+  position: relative;
+}
+
+.post-detail p {
+  color: rgba(0,0,0,0.5);
+  font-size: 0.9em;
+  margin-top: 10px;
+}
+
+.recommend-img {
+  width: 40px;
+}
+
+.recommend-img-container {
+  flex: 1;
+  text-align: right;
+  padding-right: 10px;
+}
