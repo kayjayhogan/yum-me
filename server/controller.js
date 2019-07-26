@@ -214,7 +214,7 @@ module.exports = {
         (author_id, post_id, content)
       VALUES
         ($1, $2, $3)
-    `, options)
+    ;`, options)
     .then(() => res.status(200).send("Successfully posted comment."))
     .catch(err => res.status(404).send("Error posting comment: ", err));
   },
@@ -228,7 +228,7 @@ module.exports = {
       VALUES
         ($1, $2, $3, $4, $5, $6, $7)
       RETURNING id
-    `, options)
+    ;`, options)
     .then((data) => res.status(200).send(data.rows[0]))
     .catch(err => res.status(404).send("Error posting restaurant: ", err));
   },
@@ -241,7 +241,7 @@ module.exports = {
         (title, author_id, restaurant_id, descript, recommended, img_url)
       VALUES
         ($1, $2, $3, $4, $5, $6)
-    `, options)
+    ;`, options)
     .then(() => res.status(200).send("Successfully created post"))
     .catch(err => res.status(404).send("Error creating post: ", err));
   },
@@ -253,7 +253,7 @@ module.exports = {
         (post_id, user_id)
       VALUES
         (${post_id}, ${user_id})
-    `)
+    ;`)
     .then(() => res.status(200).send("Successfully liked post"))
     .catch(err => res.status(404).send("Error liking post: ", err));
   },
@@ -264,11 +264,33 @@ module.exports = {
       DELETE from likes 
       WHERE
         post_id = ${post_id} AND user_id = ${user_id}
-    `)
+    ;`)
     .then(() => res.status(200).send("Successfully unliked post"))
     .catch(err => res.status(404).send("Error unliking post: ", err));
   },
 
+  followUser: (req, res) => {
+    const { followed_id, user_id } = req.body;
+    db.query(`
+      INSERT into followers 
+        (followed_user_id, user_id)
+      VALUES
+        (${followed_id}, ${user_id})
+    ;`)
+    .then(data => res.status(200).send(data.rows))
+    .catch(err => res.status(404).send("Error following user: ", err));
+  },
+
+  unfollowUser: (req, res) => {
+    const { followed_id, user_id } = req.body;
+    db.query(`
+      DELETE from followers 
+      WHERE
+        followed_user_id = ${followed_id} AND user_id = ${user_id}
+    ;`)
+    .then(() => res.status(200).send("Successfully following user"))
+    .catch(err => res.status(404).send("Error following user: ", err));
+  },
 // AUTHENTICATION
 
   login: (req, res) => {

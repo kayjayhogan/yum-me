@@ -19,6 +19,8 @@ router
   .post('/restaurants', controller.postRestaurant)
   .post('/posts', controller.createPost)
   .post('/posts/like', controller.likePost)
-  .post('/posts/unlike', controller.unlikePost);
+  .post('/posts/unlike', controller.unlikePost)
+  .post('/users/follow', controller.followUser)
+  .post('/users/unfollow', controller.unfollowUser);
 
 module.exports = router;
