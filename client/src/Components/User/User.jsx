@@ -19,6 +19,8 @@ class User extends React.Component {
     this.fetchUserPosts = this.fetchUserPosts.bind(this);
     this.fetchFollowers = this.fetchFollowers.bind(this);
     this.fetchFollowing = this.fetchFollowing.bind(this);
+    this.handleFollow = this.handleFollow.bind(this);
+    this.handleUnfollow = this.handleUnfollow.bind(this);
   }
 
   componentDidMount() {
@@ -43,7 +45,7 @@ class User extends React.Component {
     axios.get(`/users/${id}/followers`)
     .then(({ data }) => {
       for(let obj of data) {
-        if(obj['user_id'] === this.state.currentUser.id) {
+        if(obj["user_id"] === this.state.currentUser.id) {
           this.setState({
             followStatus: true,
             followers: data.length
@@ -55,7 +57,7 @@ class User extends React.Component {
         }
       }      
     })
-    .catch(err => console.log("Error fetching user's posts: ", err));
+    .catch(err => console.log("Error fetching user's followers: ", err));
   }
 
   fetchFollowing() {
@@ -67,6 +69,26 @@ class User extends React.Component {
       })
     })
     .catch(err => console.log("Error fetching user's posts: ", err));
+  }
+
+  handleFollow() {
+    const followed_id = this.state.author.id;
+    const user_id = this.state.currentUser.id;
+    axios.post("/users/follow", { followed_id, user_id })
+    .then(() => this.setState({
+      followStatus: true
+    }, this.fetchFollowers()))
+    .catch(err => console.log("Error following user: ", err));
+  }
+
+  handleUnfollow() {
+    const followed_id = this.state.author.id;
+    const user_id = this.state.currentUser.id;
+    axios.post("/users/unfollow", { followed_id, user_id })
+    .then(() => this.setState({
+      followStatus: false
+    }, this.fetchFollowers()))
+    .catch(err => console.log("Error unfollowing user: ", err));
   }
 
   render() {
@@ -83,14 +105,14 @@ class User extends React.Component {
           <img src="https://res.cloudinary.com/kjhogan/image/upload/v1536097829/terrible_ufki2y.png"></img>
         </div>
       </div>
-    // let followBtn;
-    // if(currentUser.username.length) {
-    //   followBtn = followStatus ? 
-    //   <button onClick={this.handleUnfollowUser}>unfollow</button> : 
-    //   <button onClick={this.handleFollowUser}>follow</button>
-    // } else {
-    //   followBtn = null;
-    // }
+    let followBtn;
+    if(currentUser.username.length) {
+      followBtn = followStatus ? 
+      <button onClick={this.handleUnfollow}>unfollow</button> : 
+      <button onClick={this.handleFollow}>follow</button>
+    } else {
+      followBtn = null;
+    }
 
     return( 
       <div>
@@ -100,7 +122,7 @@ class User extends React.Component {
           <div className="user-user-info">
             <div className="user-user-name">
               <h1>{author.firstname} {author.lastname}</h1>
-              {/* {followBtn} */}
+              {followBtn}
             </div>
             <h2>@{author.username}</h2>
             <div>
