@@ -83,7 +83,7 @@ class Feed extends React.Component {
       </div>
     return (
       <div>
-        <Navbar username={username} avatar={avatar} changeView={(option) => this.props.changeView(option)} changeUser={(user) => this.props.changeUser(user)} handleSearch={(term) => this.props.handleSearchTerm(term)}/>
+        <Navbar username={username} avatar={avatar} changeView={(option) => this.props.changeView(option)} changeUser={(user) => this.props.changeUser(user)} handleSearchTerm={(term) => this.props.handleSearchTerm(term)}/>
         <div className="feed-main">
           <div className="user-info">
             <div className="user-info-inner">

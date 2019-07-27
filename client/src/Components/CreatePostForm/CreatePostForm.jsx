@@ -142,7 +142,7 @@ class CreatePostForm extends React.Component {
 
     return(
       <div>
-        <Navbar username={this.props.user.username} avatar={this.props.user.avatar} changeView={(option) => this.props.changeView(option)} changeUser={(user) => this.props.changeUser(user)} handleSearch={(term) => this.props.handleSearchTerm(term)}/>
+        <Navbar username={this.props.user.username} avatar={this.props.user.avatar} changeView={(option) => this.props.changeView(option)} changeUser={(user) => this.props.changeUser(user)} handleSearchTerm={(term) => this.props.handleSearchTerm(term)}/>
         <div className="create-post">          
           <div className="create-post-container">
             <h1>Create New Post</h1>

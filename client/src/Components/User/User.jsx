@@ -116,7 +116,7 @@ class User extends React.Component {
 
     return( 
       <div>
-        <Navbar username={currentUser.username} avatar={currentUser.avatar} changeView={(option) => this.props.changeView(option)} changeUser={(user) => this.props.changeUser(user)} handleSearch={(term) => this.handleSearchTerm(term)}/>
+        <Navbar username={currentUser.username} avatar={currentUser.avatar} changeView={(option) => this.props.changeView(option)} changeUser={(user) => this.props.changeUser(user)} handleSearchTerm={(term) => this.handleSearchTerm(term)}/>
         <div className="user-user-info-container">
           <img className="user-avatar-photo" src={author.avatar} />
           <div className="user-user-info">
