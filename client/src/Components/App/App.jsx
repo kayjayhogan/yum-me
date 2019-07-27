@@ -5,6 +5,7 @@ import Feed from '../Feed/Feed.jsx';
 import Post from '../Post/Post.jsx';
 import User from '../User/User.jsx';
 import CreatePostForm from '../CreatePostForm/CreatePostForm.jsx';
+import Search from '../Search/Search.jsx';
 import './App.css';
 
 class App extends React.Component {
@@ -26,7 +27,7 @@ class App extends React.Component {
   handleSearchTerm(term) {
     this.setState({
       term: term
-    })
+    }, this.changeView('search'));
   }
 
   changeView(option) {
@@ -68,6 +69,8 @@ class App extends React.Component {
       return <Feed user={this.state.user} changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)} renderPost={(post) => this.renderPost(post)} handleSearch={(term) => this.handleSearchTerm(term)}/>
     } else if (view === 'post') {
       return <Post post={this.state.currentPost} user={this.state.user} changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)} renderUserPage={(user) => this.renderUserPage(user)} handleSearch={(term) => this.handleSearchTerm(term)}/> 
+    } else if (view === 'search') {
+      return <Search user={this.state.user} changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)} renderUserPage={(user) => this.renderUserPage(user)} handleSearch={(term) => this.handleSearchTerm(term)}/> 
     } 
   }
 
