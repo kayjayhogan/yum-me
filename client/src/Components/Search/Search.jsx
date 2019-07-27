@@ -8,7 +8,23 @@ import './Search.css';
 class Search extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      term: this.props.term,
+      posts: [],
+      users: []
+    };
+  }
+
+  componentDidMount() {
+
+  }
+
+  render() {
+    return(
+      <div>
+        {this.state.term}
+      </div>
+    );
   }
 }
 

@@ -44,9 +44,7 @@ class Navbar extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.setState({
-      redirect: true
-    });
+    this.props.handleSearchTerm(this.state.term);
   }
 
   render() {
