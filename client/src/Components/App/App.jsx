@@ -14,12 +14,19 @@ class App extends React.Component {
       view: 'landing',
       currentPost: {},
       userPage: {},
-      user: {}
+      user: {},
+      term: ''
     }
     this.changeView = this.changeView.bind(this);
     this.changeUser = this.changeUser.bind(this);
     this.renderPost = this.renderPost.bind(this);
     this.renderUserPage = this.renderUserPage.bind(this);
+  }
+
+  handleSearchTerm(term) {
+    this.setState({
+      term: term
+    })
   }
 
   changeView(option) {
@@ -52,15 +59,15 @@ class App extends React.Component {
     if (view === 'landing') {
       return <Landing changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)} />
     } else if (view === 'browse') {
-      return <Browse user={this.state.user} changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)} renderPost={(post) => this.renderPost(post)} /> 
+      return <Browse user={this.state.user} changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)} renderPost={(post) => this.renderPost(post)} handleSearch={(term) => this.handleSearchTerm(term)} /> 
     } else if (view === 'create') {
-      return <CreatePostForm user={this.state.user} changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)} />
+      return <CreatePostForm user={this.state.user} changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)} handleSearch={(term) => this.handleSearchTerm(term)}/>
     } else if (view === 'user') {
-      return <User user={this.state.user} changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)} renderPost={(post) => this.renderPost(post)} userPage={this.state.userPage}/> 
+      return <User user={this.state.user} changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)} renderPost={(post) => this.renderPost(post)} userPage={this.state.userPage} handleSearch={(term) => this.handleSearchTerm(term)}/> 
     } else if (view === 'feed') {
-      return <Feed user={this.state.user} changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)} renderPost={(post) => this.renderPost(post)}/>
+      return <Feed user={this.state.user} changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)} renderPost={(post) => this.renderPost(post)} handleSearch={(term) => this.handleSearchTerm(term)}/>
     } else if (view === 'post') {
-      return <Post post={this.state.currentPost} user={this.state.user} changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)} renderUserPage={(user) => this.renderUserPage(user)}/> 
+      return <Post post={this.state.currentPost} user={this.state.user} changeView={(option) => this.changeView(option)} changeUser={(user) => this.changeUser(user)} renderUserPage={(user) => this.renderUserPage(user)} handleSearch={(term) => this.handleSearchTerm(term)}/> 
     } 
   }
 

@@ -192,7 +192,7 @@ class Post extends React.Component {
     return (
       <div> 
         {modal}
-        <NavBar username={username} avatar={avatar} changeView={(option) => this.props.changeView(option)} changeUser={(user) => this.props.changeUser(user)}/>
+        <NavBar username={username} avatar={avatar} changeView={(option) => this.props.changeView(option)} changeUser={(user) => this.props.changeUser(user)} handleSearch={(term) => this.props.handleSearchTerm(term)}/>
         <div className="show-post-container">
           <div className="show-post-main">
             <div className="show-post-post-container">
