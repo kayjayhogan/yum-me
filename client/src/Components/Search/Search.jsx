@@ -49,9 +49,16 @@ class Search extends React.Component {
         return <div className="grid-item-four hvr-grow" key={i}><PostCard post={post} /></div>               
       }) : 
       <p className="result-p">No posts found</p>;
+    // showing posts with restaurant match
+    let postRestaurantList = this.state.postsRestaurantMatch.length ? 
+      this.state.postsRestaurantMatch.map((result, i) => {
+        return <div className="grid-item-four hvr-grow" key={i}><PostCard post={result["to_json"]} /></div>               
+      }) : 
+      <p className="result-p">No posts found</p>;
 
     let users = this.state.usersMatch.length === 1 ? "user" : "users";
     let postsT = this.state.postsTitleMatch.length === 1 ? "post" : "posts";
+    let postsR = this.state.postsRestaurantMatch.length === 1 ? "restaurant" : "restaurants";
     return(
       <div>
         <Navbar username={this.props.user.username} avatar={this.props.user.avatar} changeView={(option) => this.props.changeView(option)} changeUser={(user) => this.props.changeUser(user)} handleSearchTerm={(term) => this.props.handleSearchTerm(term)}/>
@@ -72,6 +79,15 @@ class Search extends React.Component {
               <h2><strong>{this.state.postsTitleMatch.length}</strong> {postsT}</h2>
               <div className="col-grid">
                 {postTitleList}
+              </div>
+            </div>
+          </div>
+          <div>
+            {/* RESTAURANTS */}
+            <div className="browse-wrap">
+              <h2><strong>{this.state.postsRestaurantMatch.length}</strong> {postsR}</h2>
+              <div className="col-grid">
+                {postRestaurantList}
               </div>
             </div>
           </div>

@@ -203,7 +203,7 @@ module.exports = {
   search: (req, res) => {
     const { term } = req.query;
     db.query(`
-      SELECT post, rest.rest_name
+      SELECT to_json(post), rest.rest_name
         FROM posts post
       INNER JOIN
         restaurants rest
