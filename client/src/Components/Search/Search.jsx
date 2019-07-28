@@ -40,19 +40,19 @@ class Search extends React.Component {
     // showing user matches
     let userList = this.state.usersMatch.length ? 
     this.state.usersMatch.map((user, i) => {
-      return <div className="grid-item-five hvr-grow" key={i}><UserCard user={user} /></div>               
+      return <div className="grid-item-five hvr-grow" key={i} onClick={() => this.props.renderUserPage(user)}><UserCard user={user} /></div>               
     }) : 
     <p className="result-p">No users found</p>;
     // showing posts with title match
     let postTitleList = this.state.postsTitleMatch.length ? 
       this.state.postsTitleMatch.map((post, i) => {
-        return <div className="grid-item-four hvr-grow" key={i}><PostCard post={post} /></div>               
+        return <div className="grid-item-four hvr-grow" key={i} onClick={() => this.props.renderPost(post)}><PostCard post={post} /></div>               
       }) : 
       <p className="result-p">No posts found</p>;
     // showing posts with restaurant match
     let postRestaurantList = this.state.postsRestaurantMatch.length ? 
       this.state.postsRestaurantMatch.map((result, i) => {
-        return <div className="grid-item-four hvr-grow" key={i}><PostCard post={result["to_json"]} /></div>               
+        return <div className="grid-item-four hvr-grow" key={i} onClick={() => this.props.renderPost(result["to_json"])}><PostCard post={result["to_json"]} /></div>               
       }) : 
       <p className="result-p">No posts found</p>;
 
