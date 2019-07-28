@@ -22,6 +22,7 @@ class App extends React.Component {
     this.changeUser = this.changeUser.bind(this);
     this.renderPost = this.renderPost.bind(this);
     this.renderUserPage = this.renderUserPage.bind(this);
+    this.handleSearchTerm = this.handleSearchTerm.bind(this);
   }
 
   handleSearchTerm(term) {
