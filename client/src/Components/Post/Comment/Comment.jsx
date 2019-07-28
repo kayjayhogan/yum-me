@@ -33,7 +33,7 @@ class Comment extends React.Component {
     return (
       <div className="single-comment">
         <div className="comment-details">
-          <img src={avatar}></img>
+          <img src={avatar} onClick={() => this.props.renderUserPage(this.state.author)}></img>
           <div>
             <p className="comment-text"><span onClick={() => this.props.renderUserPage(this.state.author)}>{username}</span>{content.toString()}</p>
             <p className="comment-date">{moment(created_at).fromNow()}</p>    
