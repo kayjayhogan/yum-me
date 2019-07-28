@@ -106,7 +106,7 @@ class User extends React.Component {
         </div>
       </div>
     let followBtn;
-    if(currentUser.username.length) {
+    if(currentUser.username) {
       followBtn = followStatus ? 
       <button onClick={this.handleUnfollow}>unfollow</button> : 
       <button onClick={this.handleFollow}>follow</button>
