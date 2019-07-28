@@ -76,7 +76,7 @@ class PostCard extends React.Component {
   }
 
   render() {
-    const post = this.props.post;
+    const { post } = this.props;
     const { username, avatar } = this.state.user;
     const { comments, likes, restaurant } = this.state;
 
