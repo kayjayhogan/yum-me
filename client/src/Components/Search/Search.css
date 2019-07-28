@@ -1,0 +1,156 @@
+.search {
+  padding-top: 100px;
+}
+
+.search h1 {
+  text-align: center;
+  color: #3b1360;
+}
+
+.search h2 {
+  color: #3b1360;
+  font-weight: normal;
+  margin: 25px 0 25px 1.25%;
+}
+
+.result-p {
+  margin-left: 1.25%;
+  margin-bottom: 15px;
+  color: rgba(0,0,0,0.5);
+}
+
+.browse-wrap {
+  width: 95vw;
+  margin-right: auto;
+  margin-left: auto;
+  box-sizing: border-box;
+}
+
+.hvr-grow {
+  display: inline-block;
+  vertical-align: middle;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  transition-duration: 0.3s;
+  transition-property: transform;
+}
+
+.hvr-grow:hover,
+.hvr-grow:focus,
+.hvr-grow:active {
+  transform: scale(1.1);
+  position: relative;
+  z-index: 50;
+  cursor: pointer;
+}
+
+/* MOBILE */
+.col-grid {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.col-grid .grid-item-four,
+.col-grid .grid-item-five {
+  margin-bottom: 15px;
+}
+
+/* TABLET */
+@media screen and (min-width: 768px) {
+  .col-grid {
+    flex-direction: row;
+  }
+
+  .col-grid .grid-item-four,
+  .col-grid .grid-item-five {
+    flex-basis: 45%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    margin-bottom: 15px;
+  }
+} 
+
+/* DESKTOP */
+@media screen and (min-width: 1025px) {  
+  .col-grid .grid-item-four {
+    flex-basis: 22.5%;
+    margin-left: 1.25%;
+    margin-right: 1.25%;
+    margin-bottom: 15px;
+  }
+
+  .col-grid .grid-item-five {
+    flex-basis: 18%;
+    margin: 0 1.25% 20px 1.25%;
+  }
+}
+
+/* .search-user-container {
+  overflow: hidden;
+} */
+
+/* -------- FOUR COLUMNS -------- */
+/* MOBILE WIDTH */
+/* .four-col-grid .grid-item {
+  margin-bottom: 20px; */
+/* } */
+
+/* TABLET */
+/* @media screen and (min-width: 768px) {
+  .four-col-grid .grid-item {
+    width: 45%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    margin-bottom: 20px;
+    float: left;
+  }
+} */
+
+/* DESKTOP */
+/* @media screen and (min-width: 1025px) {
+  .four-col-grid .grid-item {
+    width: 22.5%;
+    margin: 0 1.25% 20px 1.25%;
+    float: left;
+  }
+}
+
+.four-col-grid:after {
+  display: table;
+  clear: both;
+  content: '';
+} */
+
+/* -------- FIVE COLUMNS -------- */
+/* MOBILE WIDTH */
+/* .five-col-grid .grid-item {
+  margin-bottom: 20px;
+} */
+
+/* TABLET */
+/* @media screen and (min-width: 768px) {
+  .five-col-grid .grid-item {
+    width: 45%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    margin-bottom: 20px;
+    float: left;
+  }
+} */
+
+/* DESKTOP */
+/* @media screen and (min-width: 1025px) {
+  .five-col-grid .grid-item {
+    width: 18%;
+    margin: 0 1% 20px 1%;
+    float: left;
+  }
+}
+
+.five-col-grid:after {
+  display: table;
+  clear: both;
+  content: '';
+} */
