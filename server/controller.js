@@ -2,10 +2,6 @@ const yelp = require('yelp-fusion');
 const db = require('../database/index.js');
 const bcrypt = require('bcryptjs');
 
-let escapeRegex = (text) => {
-  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-};
-
 module.exports = { 
 
   // find recent posts made by anyone
@@ -202,6 +198,53 @@ module.exports = {
     .catch(err => {
       res.status(404).send("Error finding followed users: ", err);
     });
+  },
+  // search users or posts
+  search: (req, res) => {
+    const { term } = req.query;
+    db.query(`
+      SELECT post, rest.rest_name
+        FROM posts post
+      INNER JOIN
+        restaurants rest
+      ON
+        LOWER(rest.rest_name) LIKE LOWER('%${term}%')
+      AND
+        post.restaurant_id = rest.id
+    ;`, (err, restaurantMatches) => {
+      if(err) res.status(404).send("Could not search restaurants for search term: ", err);
+      else {
+        // fint posts where title matches
+        db.query(`
+          SELECT *
+            FROM posts
+          WHERE
+            LOWER(title) LIKE LOWER('%${term}%')
+        ;`, (err, postMatches) => {
+          if(err) res.status(404).send("Could not search posts for search term: ", err);
+          else {
+            // fint users where username or name matches
+            db.query(`
+              SELECT *
+                FROM users
+              WHERE
+                LOWER(username) LIKE LOWER('%${term}%') 
+              OR 
+                LOWER(firstname) LIKE LOWER('%${term}%') 
+              OR 
+                LOWER(lastname) LIKE LOWER('%${term}%')
+            ;`, (err, userMatches) => {
+              if(err) res.status(404).send("Could not search users for search term: ", err);
+              else res.status(200).send({ 
+                restaurantMatches: restaurantMatches.rows, 
+                postMatches: postMatches.rows, 
+                userMatches: userMatches.rows 
+              });
+            })
+          }
+        })
+      }
+    })
   },
 
 // POSTING

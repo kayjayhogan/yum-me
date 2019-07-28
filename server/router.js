@@ -13,6 +13,7 @@ router
   .get('/posts/:id/comments', controller.findPostComments)
   .get('/yelp', controller.getRestaurant)
   .get('/restaurants/:id', controller.fetchOneRestaurant)
+  .get('/search', controller.search)
   .post('/comments', controller.postComment)
   .post('/register', controller.register)
   .post('/login', controller.login)
