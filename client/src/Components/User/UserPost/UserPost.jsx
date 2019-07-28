@@ -58,8 +58,8 @@ class UserPost extends React.Component {
 
   render() {
     const { author, post, restaurant, likes, comments } = this.state;
-    const { title, descript, img_url, recommend, created_at } = post;
-    const recommendImage = recommend ? 
+    const { title, descript, img_url, recommended, created_at } = post;
+    const recommendImage = recommended ? 
       <img className="recommend-img" src="https://res.cloudinary.com/kjhogan/image/upload/v1562452169/yumme_4_ukpyej.png"></img> :
       <img className="recommend-img" src="https://res.cloudinary.com/kjhogan/image/upload/v1562452170/yumme_2_wphphq.png"></img>
 
