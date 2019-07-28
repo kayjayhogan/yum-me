@@ -92,7 +92,6 @@ class User extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     const { posts, author, currentUser, followStatus, followers, following } = this.state;
     const userPostSection = this.state.posts.length ? 
       <div className="two-col-grid">
