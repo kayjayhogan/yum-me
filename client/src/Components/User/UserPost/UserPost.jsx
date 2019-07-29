@@ -65,7 +65,7 @@ class UserPost extends React.Component {
 
     return( 
     <div>
-      <div className="feed-post">
+      <div className="user-feed-post">
         <div className="feed-post-user-stripe">
           <img className="post-avatar" src={author.avatar}></img>
           <div>
