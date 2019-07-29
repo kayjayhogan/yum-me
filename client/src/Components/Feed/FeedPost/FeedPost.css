@@ -1,8 +1,9 @@
 .feed-post {
   border: 1px solid rgba(0,0,0,0.2);
   border-radius: 4px;
-  margin:0 15px 15px 15px;
+  margin: 0 auto 15px auto;
   background-color: white;
+  width: 85%;
 }
 
 .post-avatar {

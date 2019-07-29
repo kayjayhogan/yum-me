@@ -10,17 +10,20 @@ class FeedPost extends React.Component {
     this.state = {
       author: {},
       likes: 0,
-      comments: 0
+      comments: 0,
+      restaurant: ''
     };
     this.fetchUser = this.fetchUser.bind(this);
     this.fetchComments = this.fetchComments.bind(this);
     this.fetchLikes = this.fetchLikes.bind(this);
+    this.fetchRestaurant = this.fetchRestaurant.bind(this);
   }
 
   componentDidMount() {
     this.fetchUser();
     this.fetchComments();
     this.fetchLikes();
+    this.fetchRestaurant();
   }
 
   fetchUser() {
@@ -53,9 +56,19 @@ class FeedPost extends React.Component {
     .catch(err => console.log("Error fetching likes: ", err));
   }
 
+  fetchRestaurant() {
+    const id = this.props.post['restaurant_id'];
+    axios.get(`/restaurants/${id}`)
+    .then(({ data }) => {
+      this.setState({
+        restaurant: data['rest_name']
+      });
+    })
+  }
+
   render() {
-    const { currentUser, currentAvatar } = this.props;
-    const { author_id, title, img_url, restaurant, descript, recommended, created_at } = this.props.post;
+    const { title, img_url, descript, recommended, created_at } = this.props.post;
+    const { restaurant, author } = this.state;
     const recommendImage = recommended ? 
       <img className="recommend-img" src="https://res.cloudinary.com/kjhogan/image/upload/v1562452169/yumme_4_ukpyej.png"></img> :
       <img className="recommend-img" src="https://res.cloudinary.com/kjhogan/image/upload/v1562452170/yumme_2_wphphq.png"></img>
@@ -64,10 +77,10 @@ class FeedPost extends React.Component {
       <div>
         <div className="feed-post">
           <div className="feed-post-user-stripe">
-            <img className="post-avatar" src={this.state.author.avatar}></img>
+            <img className="post-avatar" src={author.avatar}></img>
             <div>
               {/* INSERT USER PROFILE LINK BELOW */}
-              <a>{this.state.author.username}</a>                
+              <a>{author.username}</a>                
               <p><strong>Restaurant: </strong>{restaurant}</p>
             </div>
             <div className="recommend-img-container">{recommendImage}</div>          
