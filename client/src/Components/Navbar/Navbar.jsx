@@ -17,6 +17,7 @@ class Navbar extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleShowModal = this.handleShowModal.bind(this);
     this.handleHideModal = this.handleHideModal.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   handleShowModal() {
@@ -47,6 +48,11 @@ class Navbar extends React.Component {
     this.props.handleSearchTerm(this.state.term);
   }
 
+  handleLogout() {
+    this.props.changeUser({});
+    this.props.changeView('browse');
+  }
+
   render() {
     const modal = this.state.showModal ? 
     (<AuthModal handleHide={this.handleHideModal} changeView={(option) => this.props.changeView(option)} changeUser={(user) => this.props.changeUser(user)}></AuthModal>) : null;
@@ -58,17 +64,17 @@ class Navbar extends React.Component {
       <ul className="main-nav" id="js-menu">
         <div>
           <li>
-            <a onClick={(option) => this.props.changeView('browse')} className="nav-links">browse</a>
+            <a onClick={() => this.props.changeView('browse')} className="nav-links">browse</a>
           </li>     
         </div>
         <div>
           <li>
-            <a onClick={(option) => this.props.changeView('create')} className="nav-links">create post</a>
+            <a onClick={() => this.props.changeView('create')} className="nav-links">create post</a>
           </li>     
         </div>
         <div>
           <li>
-            <a className="nav-links">log out</a>
+            <a className="nav-links" onClick={this.handleLogout}>log out</a>
           </li>
         </div>
         <div>
@@ -80,7 +86,7 @@ class Navbar extends React.Component {
       <ul className="main-nav" id="js-menu">
         <div>
           <li>
-            <a onClick={(option) => this.props.changeView('browse')} className="nav-links">browse</a>
+            <a onClick={() => this.props.changeView('browse')} className="nav-links">browse</a>
           </li>     
         </div>
         <div>
@@ -102,7 +108,7 @@ class Navbar extends React.Component {
           <span className="navbar-toggle" onClick={this.handleMenu}>
             <FaBars />
           </span>
-          <div className="nav-logo-container" onClick={(option) => this.props.changeView(clickLogoView)}>
+          <div className="nav-logo-container" onClick={() => this.props.changeView(clickLogoView)}>
             <a className="nav-logo">
               <img src="https://res.cloudinary.com/kjhogan/image/upload/v1562452169/yumme_logo_white_plvcb7.png"></img>        
             </a>
