@@ -71,7 +71,7 @@ class Search extends React.Component {
     let postsR = this.state.postsRestaurantMatch.length === 1 ? "restaurant" : "restaurants";
     return(
       <div>
-        <Navbar username={this.props.user.username} avatar={this.props.user.avatar} changeView={(option) => this.props.changeView(option)} changeUser={(user) => this.props.changeUser(user)} handleSearchTerm={(term) => this.props.handleSearchTerm(term)}/>
+        <Navbar currentUser={this.props.user} changeView={(option) => this.props.changeView(option)} changeUser={(user) => this.props.changeUser(user)} renderUserPage={(user) => this.props.renderUserPage(user)} handleSearchTerm={(term) => this.props.handleSearchTerm(term)}/>
         <div className="search">
           <h1>Search Results for "{this.state.term}"</h1>
           <div className="search-user-container">

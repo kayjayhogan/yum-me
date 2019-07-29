@@ -7,11 +7,9 @@ class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.state= {
-      username: this.props.username,
-      avatar: this.props.avatar,
       term: '',
       showModal: false,
-      currentUser: this.props.user
+      currentUser: this.props.currentUser
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -54,13 +52,14 @@ class Navbar extends React.Component {
   }
 
   render() {
+    const { currentUser } = this.state;
     const modal = this.state.showModal ? 
     (<AuthModal handleHide={this.handleHideModal} changeView={(option) => this.props.changeView(option)} changeUser={(user) => this.props.changeUser(user)}></AuthModal>) : null;
    
-    const clickLogoView = this.state.username ? 'feed' : 'landing';
+    const clickLogoView = currentUser.username ? 'feed' : 'landing';
 
     // rightmost part of navbar, depending on whether logged in
-    const mainNav = this.state.username ? 
+    const mainNav = currentUser.username ? 
       <ul className="main-nav" id="js-menu">
         <div>
           <li>
@@ -74,12 +73,12 @@ class Navbar extends React.Component {
         </div>
         <div>
           <li>
-            <a className="nav-links" onClick={this.handleLogout}>log out</a>
+            <a onClick={this.handleLogout} className="nav-links">log out</a>
           </li>
         </div>
         <div>
           <li>
-            <a className="nav-links"><FaUser /> {this.state.username}</a>
+            <a onClick={() => this.props.renderUserPage(currentUser)} className="nav-links"><FaUser /> {currentUser.username}</a>
           </li>
         </div>
       </ul> :

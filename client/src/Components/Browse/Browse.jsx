@@ -28,7 +28,7 @@ class Browse extends React.Component {
   render() {
     return(
       <div>
-        <Navbar username={this.props.user.username} avatar={this.props.user.avatar} changeView={(option) => this.props.changeView(option)} changeUser={(user) => this.props.changeUser(user)} handleSearchTerm={(term) => this.props.handleSearchTerm(term)}/>
+        <Navbar currentUser={this.props.user} changeView={(option) => this.props.changeView(option)} changeUser={(user) => this.props.changeUser(user)} renderUserPage={(user) => this.props.renderUserPage(user)} handleSearchTerm={(term) => this.props.handleSearchTerm(term)}/>
         <h1 className="browse-h1">Recent Posts</h1>
         <div className="browse-wrap">
           <div className="four-col-grid">

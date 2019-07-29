@@ -155,7 +155,7 @@ class Post extends React.Component {
     const modal = this.state.showModal ? 
       (<AuthModal handleHide={this.handleHideModal} changeView={(option) => this.props.changeView(option)} changeUser={(user) => this.props.changeUser(user)}></AuthModal>) : null;
     // variables to use below
-    const { username, avatar, id } = this.props.user;
+    const { username, id } = this.props.user;
     const { created_at, img_url, recommended, descript, title } = this.state.post;
     const { comments, author, likes, restaurant } = this.state;
     const { rest_name, address_city, address_state, address_country, price, rating, rest_url } = restaurant;
@@ -192,7 +192,7 @@ class Post extends React.Component {
     return (
       <div> 
         {modal}
-        <NavBar username={username} avatar={avatar} changeView={(option) => this.props.changeView(option)} changeUser={(user) => this.props.changeUser(user)} handleSearchTerm={(term) => this.props.handleSearchTerm(term)}/>
+        <NavBar currentUser={this.props.user} changeView={(option) => this.props.changeView(option)} changeUser={(user) => this.props.changeUser(user)} renderUserPage={(user) => this.props.renderUserPage(user)} handleSearchTerm={(term) => this.props.handleSearchTerm(term)}/>
         <div className="show-post-container">
           <div className="show-post-main">
             <div className="show-post-post-container">
