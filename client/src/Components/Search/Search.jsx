@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Navbar from '../Navbar/Navbar.jsx';
-import PostCard from '../Browse/PostCard/PostCard.jsx';
+import SearchPostCard from './SearchPostCard/SearchPostCard.jsx';
 import UserCard from './UserCard/UserCard.jsx';
 import './Search.css';
 
@@ -9,7 +9,7 @@ class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      term: this.props.term,
+      term: '',
       postsTitleMatch: [],
       postsRestaurantMatch: [],
       usersMatch: []
@@ -18,7 +18,17 @@ class Search extends React.Component {
   }
 
   componentDidMount() {
-    this.handleSearch();
+    this.setState({
+      term: this.props.term
+    }, () => this.handleSearch());
+  }
+
+  componentDidUpdate() {
+    if(this.props.term !== this.state.term) {
+      this.setState({
+        term: this.props.term
+      }, () => this.handleSearch());
+    }
   }
 
   handleSearch() {
@@ -46,13 +56,13 @@ class Search extends React.Component {
     // showing posts with title match
     let postTitleList = this.state.postsTitleMatch.length ? 
       this.state.postsTitleMatch.map((post, i) => {
-        return <div className="grid-item-four hvr-grow" key={i} onClick={() => this.props.renderPost(post)}><PostCard post={post} /></div>               
+        return <div className="grid-item-four hvr-grow" key={i} onClick={() => this.props.renderPost(post)}><SearchPostCard post={post} /></div>               
       }) : 
       <p className="result-p">No posts found</p>;
     // showing posts with restaurant match
     let postRestaurantList = this.state.postsRestaurantMatch.length ? 
       this.state.postsRestaurantMatch.map((result, i) => {
-        return <div className="grid-item-four hvr-grow" key={i} onClick={() => this.props.renderPost(result["to_json"])}><PostCard post={result["to_json"]} /></div>               
+        return <div className="grid-item-four hvr-grow" key={i} onClick={() => this.props.renderPost(result["to_json"])}><SearchPostCard post={result["to_json"]} /></div>               
       }) : 
       <p className="result-p">No posts found</p>;
 

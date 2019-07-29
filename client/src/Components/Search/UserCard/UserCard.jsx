@@ -8,17 +8,32 @@ class UserCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: this.props.user,
+      user: {},
       posts: 0,
       followers: 0
     };
     this.fetchPosts = this.fetchPosts.bind(this);
     this.fetchFollowers = this.fetchFollowers.bind(this);
+    this.updateUserCard = this.updateUserCard.bind(this);
   }
 
   componentDidMount() {
-    this.fetchPosts();
-    this.fetchFollowers();
+    this.updateUserCard();
+  }
+
+  componentDidUpdate() {
+    if(this.props.user.id !== this.state.user.id) {
+      this.updateUserCard();
+    }
+  }
+
+  updateUserCard() {
+    this.setState({
+      user: this.props.user
+    }, () => {
+      this.fetchPosts();
+      this.fetchFollowers();
+    });
   }
 
   fetchPosts() {
