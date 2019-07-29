@@ -338,19 +338,7 @@ module.exports = {
 
   login: (req, res) => {
     const { email, password } = req.body;
-    // MAKE PROMISE OF BCRYPT COMPARE
-    checkPassword = (password, hash) => {
-      return new Promise((resolve, reject) => {
-        bcrypt.compare(password, hash, (err, res) => {            
-          if (err) {
-            reject(err);
-          } 
-          else {
-            resolve(res);        
-          }            
-        });
-      });
-    }
+    // find user to compare passwords
     db.query(`
       SELECT * 
         FROM users
@@ -361,11 +349,16 @@ module.exports = {
       if(!data.rows[0]) {
         res.status(404).send("No email found.");
       }
-      if(checkPassword(password, data.rows[0].pass)) {
-        return data.rows[0];
-      }
+      bcrypt.compare(password, data.rows[0].pass, (err, response) => {
+        if(err) console.log("Error with bcrypt: ", err);
+        else if(response) {
+          res.status(200).send(data.rows[0]);
+        }
+        else {
+          res.status(404).send("Incorrect password");
+        }
+      });
     })
-    .then((data) => res.status(200).send(data))
     .catch(err => {
       res.status(404).send("Error logging in: ", err);
     })
