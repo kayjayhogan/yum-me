@@ -26,10 +26,17 @@ class Login extends React.Component {
     const { email, password } = this.state;
     axios.post('/login', { email, password })
       .then(async ({ data }) => {
-        await this.props.changeUser(data);
-        this.props.changeView('feed');
+        if(typeof data === 'object') {
+          await this.props.changeUser(data);
+          this.props.changeView('feed');
+        } else {
+          alert("Sorry, that password is not correct.")
+        }
       })
-      .catch(err => console.log("Could not login user: ", err));
+      .catch(err => {
+        alert("Could not login. Please double-check your login credentials.");
+        console.log("Could not login user: ", err)
+      });
   }
 
   render() {

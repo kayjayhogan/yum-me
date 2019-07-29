@@ -355,7 +355,7 @@ module.exports = {
           res.status(200).send(data.rows[0]);
         }
         else {
-          res.status(404).send("Incorrect password");
+          res.status(204).send("Incorrect password");
         }
       });
     })
