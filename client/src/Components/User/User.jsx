@@ -95,7 +95,7 @@ class User extends React.Component {
     const { posts, author, currentUser, followStatus, followers, following } = this.state;
     const userPostSection = this.state.posts.length ? 
       <div className="two-col-grid">
-        {posts.map((post, i) => <div key={i} className="grid-item hvr-grow"><UserPost post={post} author={author}/></div>)}
+        {posts.map((post, i) => <div key={i} className="grid-item hvr-grow" onClick={() => this.props.renderPost(post)}><UserPost post={post} author={author}/></div>)}
       </div> : 
       <div className="user-no-posts">
         <h3>It looks like this user hasn't posted anything yet.</h3>
