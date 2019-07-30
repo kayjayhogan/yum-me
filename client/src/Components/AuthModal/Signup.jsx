@@ -85,7 +85,7 @@ class Signup extends React.Component {
             <span className="account-show-password" onClick={this.handleShowPassword}>Show</span>
           </div>
           <input type="password" name="password2" className="account-form-input" placeholder="Confirm Password" onChange={this.handleChange} required></input>         
-          <input type="text" name="location" className="account-form-input" placeholder="Location (City, State)" onChange={this.handleChange} required></input>         
+          <input type="text" name="location" className="account-form-input" placeholder="Location" onChange={this.handleChange} required></input>         
           <div>
             <label>
               Avatar:
