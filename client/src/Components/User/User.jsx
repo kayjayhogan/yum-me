@@ -68,7 +68,7 @@ class User extends React.Component {
         following: data.length
       })
     })
-    .catch(err => console.log("Error fetching user's posts: ", err));
+    .catch(err => console.log("Error fetching user's following: ", err));
   }
 
   handleFollow() {
