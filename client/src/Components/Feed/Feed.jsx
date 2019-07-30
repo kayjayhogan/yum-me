@@ -68,7 +68,7 @@ class Feed extends React.Component {
     const { feed, following, followers } = this.state;
     const feedSection = this.state.feed.length > 0 ? 
       <div className="feed-post-main">
-        {feed.map((post, i) => <FeedPost post={post} key={i} currentUser={username} currentAvatar={avatar} renderPost={(post) => this.props.renderPost(post)}/>)}
+        {feed.map((post, i) => <FeedPost post={post} key={i} currentUser={username} currentAvatar={avatar} renderPost={(post) => this.props.renderPost(post)} renderUserPage={(user) => this.props.renderUserPage(user)}/>)}
       </div> : 
       <div className="feed-post-main">
         <div className="feed-no-feed">

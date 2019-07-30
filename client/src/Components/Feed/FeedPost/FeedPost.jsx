@@ -79,8 +79,7 @@ class FeedPost extends React.Component {
           <div className="feed-post-user-stripe">
             <img className="post-avatar" src={author.avatar}></img>
             <div>
-              {/* INSERT USER PROFILE LINK BELOW */}
-              <a>{author.username}</a>                
+              <a onClick={() => this.props.renderUserPage(author)}>{author.username}</a>                
               <p><strong>Restaurant: </strong>{restaurant}</p>
             </div>
             <div className="recommend-img-container">{recommendImage}</div>          
