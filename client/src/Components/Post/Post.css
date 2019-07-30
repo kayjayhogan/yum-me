@@ -183,8 +183,7 @@
 }
 
 .post-like-icon-activated {
-  position: relative;
-  top: 1px;
+  vertical-align: top !important;
   margin-left: 20px;
   color: #6923aa;
   cursor: pointer;
