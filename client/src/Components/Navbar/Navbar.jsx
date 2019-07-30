@@ -90,12 +90,12 @@ class Navbar extends React.Component {
         </div>
         <div>
           <li>
-            <a href="#" className="nav-links">create post</a>
+            <a onClick={this.handleShowModal} className="nav-links">create post</a>
           </li>     
         </div>
         <div>
           <li>
-            <a className="nav-links" onClick={this.handleShowModal}>log in</a>
+            <a onClick={this.handleShowModal} className="nav-links">log in</a>
           </li>
         </div>
       </ul>
