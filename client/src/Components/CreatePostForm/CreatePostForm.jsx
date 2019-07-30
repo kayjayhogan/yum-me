@@ -126,7 +126,10 @@ class CreatePostForm extends React.Component {
         image: "",
         file: null,
         recommended: true, 
-      }, console.log("Successfully posted restaurant."))
+      }, () => {
+        this.props.changeView('browse');
+        console.log("Successfully posted restaurant.");
+      })
     })
     .catch(err => console.log("Error posting restaurant: ", err));
   }
