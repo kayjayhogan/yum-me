@@ -76,6 +76,8 @@ module.exports = {
         FROM posts
       WHERE
         author_id = ${id}
+      ORDER BY
+        created_at DESC
     ;`)
     .then((data) => {
       res.status(200).send(data.rows);
