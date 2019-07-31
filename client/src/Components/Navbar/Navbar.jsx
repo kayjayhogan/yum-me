@@ -47,8 +47,12 @@ class Navbar extends React.Component {
   }
 
   handleLogout() {
-    this.props.changeUser({});
-    this.props.changeView('browse');
+    this.setState({
+      currentUser: {}
+    }, () => {
+      this.props.changeUser({});
+      this.props.changeView('browse');
+    });
   }
 
   render() {
