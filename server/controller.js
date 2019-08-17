@@ -336,6 +336,23 @@ module.exports = {
     .then(() => res.status(200).send("Successfully following user"))
     .catch(err => res.status(404).send("Error following user: ", err));
   },
+
+// EDITING
+
+  editPost: (req, res) => {
+    const { id } = req.params;
+    const { title, descript, recommended } = req.body;
+    db.query(`
+      UPDATE posts
+      SET title = '${title}',
+          descript = '${descript}',
+          recommended = ${recommended}
+      WHERE id = ${id}
+    ;`)
+    .then(() => res.status(200).send("Successfully edited post"))
+    .catch(err => res.status(404).send("Error updating post: ", err));
+  },
+
 // AUTHENTICATION
 
   login: (req, res) => {

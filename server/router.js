@@ -22,6 +22,7 @@ router
   .post('/posts/like', controller.likePost)
   .post('/posts/unlike', controller.unlikePost)
   .post('/users/follow', controller.followUser)
-  .post('/users/unfollow', controller.unfollowUser);
+  .post('/users/unfollow', controller.unfollowUser)
+  .patch('/posts/:id', controller.editPost);
 
 module.exports = router;
